@@ -117,6 +117,7 @@ button{font:inherit;color:inherit}
 
 /* ---------- sections ---------- */
 .section{padding:clamp(80px,12vh,140px) 0}
+[id]{scroll-margin-top:72px}
 .section--line{border-top:1px solid var(--line)}
 .sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:32px;align-items:start;margin-bottom:clamp(44px,7vh,72px)}
 .sec-head > .label{padding-top:14px}
@@ -279,6 +280,8 @@ button{font:inherit;color:inherit}
   .hero__ctas .btn{flex:1 1 100%}
   .bars{height:260px;gap:8px}
   .bar__info b{font-size:13px}
+  .bar{padding:16px 0}
+  .bar__num{display:none}
   .chart__foot{flex-direction:column;gap:4px}
   .form__row{grid-template-columns:1fr}
   .stats dd{font-size:40px}
