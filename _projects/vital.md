@@ -4,7 +4,7 @@ title: Vital
 category: consumer-electronics            # kitchen, lighting, defense, packaging or consumer-electronics
 type: "[Product type]"
 order: 5                  # position in lists (1 = first)
-featured: true            # true = show in "Selected works" on the homepage
+featured: false           # true = show in "Selected works" on the homepage
 year: "[Year]"
 client: "[Client name or 'Confidential']"
 summary: "[One or two sentences: what the product is and what KLIPYDESIGN did.]"

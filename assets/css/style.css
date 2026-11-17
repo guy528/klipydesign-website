@@ -454,3 +454,10 @@ a.pcard__panel{display:grid;text-decoration:none;color:var(--ink)}
   .gallery{grid-template-columns:1fr}
   .faq__a{padding-right:0}
 }
+
+/* real photos fill their panels instead of floating inside them */
+.pcard__panel.is-photo img{object-fit:cover;padding:0}
+.proj-cover__panel.is-photo img{object-fit:cover;padding:0}
+.work__img.is-photo{object-fit:cover;border-radius:clamp(28px,4vw,64px);max-height:100%;aspect-ratio:1/1}
+.tile__img[src$=".jpg"]{mix-blend-mode:luminosity}
+.tile.is-hover .tile__img[src$=".jpg"]{opacity:.42}

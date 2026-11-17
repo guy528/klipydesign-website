@@ -15,6 +15,7 @@ scope: [Concept design, 3D prototyping, Mechanisms, DFM]
 materials: "PP, stainless steel"
 cover: /assets/img/projects/smart-kettle/cover.jpg
 cover_alt: "Smart kettle designed by KLIPYDESIGN"
+photo: true                # true = photos fill the coloured panels (use false for cut-out PNGs)
 gallery:                   # optional — delete these lines if you have no extra photos
   - image: /assets/img/projects/smart-kettle/sketch.jpg
     caption: Early sketches

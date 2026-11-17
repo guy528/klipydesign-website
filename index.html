@@ -95,7 +95,7 @@ layout: null
            To use real photos, replace the images in assets/img/categories/ and update the src. -->
       <nav class="mosaic" id="mosaic" aria-label="Product categories">
         <a class="tile" href="/kitchen/" data-name="Kitchen products" style="--c:var(--red);--ink:#fff">
-          <img class="tile__img" src="/assets/img/categories/kitchen-light.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <img class="tile__img" src="/assets/img/categories/kitchen-photo.jpg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
           <span class="tile__label"><span class="tile__num">01</span><b>Kitchen</b><span class="tile__go">Explore →</span></span>
         </a>
         <a class="tile" href="/lighting/" data-name="Lighting" style="--c:var(--yellow);--ink:var(--ink-1)">
@@ -148,7 +148,7 @@ layout: null
       <article class="work{% if forloop.first %} is-open{% endif %}" style="--c:var(--{{ c.color }});--ink:{{ c.ink }}">
         <button class="work__tab" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="w{{ forloop.index0 }}"><span class="work__num">0{{ forloop.index }}</span><span class="work__name">{{ p.title }}</span><span class="work__type">{{ p.type }}</span></button>
         <div class="work__panel" id="w{{ forloop.index0 }}">
-          <img class="work__img" src="{{ p.cover }}" alt="{{ p.cover_alt | default: p.title }}" width="800" height="800" loading="lazy">
+          <img class="work__img{% if p.photo %} is-photo{% endif %}" src="{{ p.cover }}" alt="{{ p.cover_alt | default: p.title }}" width="800" height="800" loading="lazy">
           <div class="work__body">
             <p class="label">0{{ forloop.index }} · {{ p.type }}</p>
             <h3>{{ p.title }}</h3>
