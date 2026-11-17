@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% assign cat = site.data.categories | where: "slug", page.category | first %}
+{% capture ptitle %}{{ page.title }} — {{ page.type }} | KLIPYDESIGN Industrial Design{% endcapture %}
+{% include head.html title=ptitle description=page.summary image=page.cover noindex=page.placeholder %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.summary | jsonify }},
+  "genre": {{ page.type | jsonify }},
+  "image": {{ site.url | append: page.cover | jsonify }},
+  "url": {{ site.url | append: page.url | jsonify }},
+  "creator": { "@type": "Organization", "name": "KLIPYDESIGN", "url": "https://klipydesign.com/" }
+}
+</script>
+</head>
+<body style="--c:var(--{{ cat.color | default: 'navy' }});--ink:{{ cat.ink | default: '#fff' }}">
+{% include header.html %}
+
+<main id="main">
+  <section class="proj-hero">
+    <div class="wrap">
+      <p class="label label--accent">
+        <a class="link" href="/">Home</a> <span>/</span>
+        <a class="link" href="/{{ cat.slug }}/">{{ cat.name }}</a> <span>/</span>
+        {{ page.title }}
+      </p>
+      <div class="proj-hero__grid">
+        <div>
+          <h1 class="cat-hero__title">{{ page.title }}<span style="color:var(--c)">.</span></h1>
+          <p class="hero__sub">{{ page.summary }}</p>
+        </div>
+        <dl class="proj-specs">
+          <div><dt>Product</dt><dd>{{ page.type }}</dd></div>
+          {% if page.client %}<div><dt>Client</dt><dd>{{ page.client }}</dd></div>{% endif %}
+          {% if page.year %}<div><dt>Year</dt><dd>{{ page.year }}</dd></div>{% endif %}
+          {% if page.scope %}<div><dt>Scope</dt><dd>{{ page.scope | join: " · " }}</dd></div>{% endif %}
+          {% if page.materials %}<div><dt>Materials</dt><dd>{{ page.materials }}</dd></div>{% endif %}
+          <div><dt>Category</dt><dd><a class="link" href="/{{ cat.slug }}/">{{ cat.name }}</a></dd></div>
+        </dl>
+      </div>
+    </div>
+    <figure class="wrap proj-cover">
+      <div class="proj-cover__panel">
+        <img src="{{ page.cover }}" alt="{{ page.cover_alt | default: page.title }}" width="1600" height="1000">
+      </div>
+    </figure>
+  </section>
+
+  <section class="section">
+    <div class="wrap proj-body">
+      <p class="label label--accent"><span>01 /</span> The project</p>
+      <div class="prose reveal">
+        {{ content }}
+      </div>
+    </div>
+  </section>
+
+  {% if page.gallery %}
+  <section class="section section--line">
+    <div class="wrap">
+      <p class="label label--accent" style="margin-bottom:32px"><span>02 /</span> Process &amp; details</p>
+      <div class="gallery stagger">
+        {% for g in page.gallery %}
+        <figure class="gallery__item{% if g.wide %} gallery__item--wide{% endif %}">
+          <img src="{{ g.image }}" alt="{{ g.caption | default: page.title }}" loading="lazy">
+          {% if g.caption %}<figcaption class="label">{{ g.caption }}</figcaption>{% endif %}
+        </figure>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="cat-cta">
+    <div class="wrap cat-cta__inner">
+      <h2>Have a product like {{ page.title }} in mind?</h2>
+      <a class="btn btn--dark magnetic" href="/#contact">Let's talk about your project <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {% assign next = page.next | default: site.projects.first %}
+      {% if next and next.url != page.url %}
+      {% assign ncat = site.data.categories | where: "slug", next.category | first %}
+      <a class="cat-next" href="{{ next.url }}" style="--c:var(--{{ ncat.color }})">
+        <span class="label">Next project</span>
+        <span class="cat-next__name">{{ next.title }} <span aria-hidden="true">→</span></span>
+      </a>
+      {% endif %}
+      <p style="margin-top:28px"><a class="link label" href="/projects/">All projects</a> &nbsp; <a class="link label" href="/{{ cat.slug }}/">More {{ cat.name | downcase }}</a></p>
+    </div>
+  </section>
+</main>
+
+{% include footer.html %}
+</body>
+</html>

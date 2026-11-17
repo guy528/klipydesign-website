@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -73,8 +76,8 @@
 <section class="hero" id="top">
   <div class="wrap hero__grid">
     <div class="hero__text">
-      <p class="label label--accent">Est. 2009 · Industrial design studio · Tel Aviv</p>
       <h1 class="hero__title">
+        <span class="hero__kicker label label--accent">Industrial design &amp; product development studio · Tel Aviv · Est. 2009</span>
         <span class="line">Unexpected</span>
         <span class="line">thinking.</span>
         <span class="line"><span class="hl">Remarkable</span></span>
@@ -133,75 +136,36 @@
       <p class="label label--accent"><span>01 /</span> Selected works</p>
       <div>
         <h2 class="h2 reveal">Objects that reached the shelf.</h2>
-        <p class="lead reveal">Five programmes, five factories, one standard. Pick a colour to open the project and the process behind it.</p>
+        <p class="lead reveal">Five programmes, five factories, one standard. Pick a colour to open the project, then read the full case study.</p>
       </div>
     </div>
 
+    <!-- Filled automatically from the _projects folder (projects with "featured: true", in "order") -->
     <div class="works" id="works">
-      <article class="work is-open" style="--c:var(--red);--ink:#fff">
-        <button class="work__tab" aria-expanded="true" aria-controls="w0"><span class="work__num">01</span><span class="work__name">Aurelis</span><span class="work__type">Espresso machine</span></button>
-        <div class="work__panel" id="w0">
-          <img class="work__img" src="assets/img/project-aurelis.svg" alt="Aurelis espresso machine designed by KLIPYDESIGN" width="800" height="800" loading="lazy">
+      {% assign featured = site.projects | where: "featured", true | sort: "order" %}
+      {% for p in featured limit: 5 %}
+      {% assign c = site.data.categories | where: "slug", p.category | first %}
+      <article class="work{% if forloop.first %} is-open{% endif %}" style="--c:var(--{{ c.color }});--ink:{{ c.ink }}">
+        <button class="work__tab" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="w{{ forloop.index0 }}"><span class="work__num">0{{ forloop.index }}</span><span class="work__name">{{ p.title }}</span><span class="work__type">{{ p.type }}</span></button>
+        <div class="work__panel" id="w{{ forloop.index0 }}">
+          <img class="work__img" src="{{ p.cover }}" alt="{{ p.cover_alt | default: p.title }}" width="800" height="800" loading="lazy">
           <div class="work__body">
-            <p class="label">01 · Espresso machine</p>
-            <h3>Aurelis</h3>
-            <p>[One or two lines on the brief, the challenge and what KLIPYDESIGN delivered.]</p>
-            <dl class="specs"><div><dt>Scope</dt><dd>[Concept · Mechanism · DFM]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div><div><dt>Category</dt><dd><a class="link" href="/kitchen/">Kitchen products</a></dd></div></dl>
+            <p class="label">0{{ forloop.index }} · {{ p.type }}</p>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.summary }}</p>
+            <dl class="specs">
+              {% if p.scope %}<div><dt>Scope</dt><dd>{{ p.scope | join: " · " }}</dd></div>{% endif %}
+              <div><dt>Category</dt><dd><a class="link" href="/{{ c.slug }}/">{{ c.name }}</a></dd></div>
+            </dl>
+            <a class="work__more" href="{{ p.url }}">View case study <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
-      <article class="work" style="--c:var(--teal);--ink:var(--ink-1)">
-        <button class="work__tab" aria-expanded="false" aria-controls="w1"><span class="work__num">02</span><span class="work__name">Nova Sense</span><span class="work__type">[Product type]</span></button>
-        <div class="work__panel" id="w1">
-          <img class="work__img" src="assets/img/project-nova-sense.svg" alt="Nova Sense product designed by KLIPYDESIGN" width="800" height="800" loading="lazy">
-          <div class="work__body">
-            <p class="label">02 · [Product type]</p>
-            <h3>Nova Sense</h3>
-            <p>[One or two lines on the brief, the challenge and what KLIPYDESIGN delivered.]</p>
-            <dl class="specs"><div><dt>Scope</dt><dd>[Scope]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div></dl>
-          </div>
-        </div>
-      </article>
-      <article class="work" style="--c:var(--navy);--ink:#fff">
-        <button class="work__tab" aria-expanded="false" aria-controls="w2"><span class="work__num">03</span><span class="work__name">Atlas</span><span class="work__type">[Product type]</span></button>
-        <div class="work__panel" id="w2">
-          <img class="work__img" src="assets/img/project-atlas.svg" alt="Atlas product designed by KLIPYDESIGN" width="800" height="800" loading="lazy">
-          <div class="work__body">
-            <p class="label">03 · [Product type]</p>
-            <h3>Atlas</h3>
-            <p>[One or two lines on the brief, the challenge and what KLIPYDESIGN delivered.]</p>
-            <dl class="specs"><div><dt>Scope</dt><dd>[Scope]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div></dl>
-          </div>
-        </div>
-      </article>
-      <article class="work" style="--c:var(--yellow);--ink:var(--ink-1)">
-        <button class="work__tab" aria-expanded="false" aria-controls="w3"><span class="work__num">04</span><span class="work__name">Kinetic</span><span class="work__type">[Product type]</span></button>
-        <div class="work__panel" id="w3">
-          <img class="work__img" src="assets/img/project-kinetic.svg" alt="Kinetic product designed by KLIPYDESIGN" width="800" height="800" loading="lazy">
-          <div class="work__body">
-            <p class="label">04 · [Product type]</p>
-            <h3>Kinetic</h3>
-            <p>[One or two lines on the brief, the challenge and what KLIPYDESIGN delivered.]</p>
-            <dl class="specs"><div><dt>Scope</dt><dd>[Scope]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div></dl>
-          </div>
-        </div>
-      </article>
-      <article class="work" style="--c:var(--steel);--ink:#fff">
-        <button class="work__tab" aria-expanded="false" aria-controls="w4"><span class="work__num">05</span><span class="work__name">Vital</span><span class="work__type">[Product type]</span></button>
-        <div class="work__panel" id="w4">
-          <img class="work__img" src="assets/img/project-vital.svg" alt="Vital product designed by KLIPYDESIGN" width="800" height="800" loading="lazy">
-          <div class="work__body">
-            <p class="label">05 · [Product type]</p>
-            <h3>Vital</h3>
-            <p>[One or two lines on the brief, the challenge and what KLIPYDESIGN delivered.]</p>
-            <dl class="specs"><div><dt>Scope</dt><dd>[Scope]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div></dl>
-          </div>
-        </div>
-      </article>
+      {% endfor %}
     </div>
 
     <div class="sec-foot label">
-      <span>Selected commissions 2023–2025</span>
+      <a href="/projects/" class="link">All projects →</a>
       <a href="#contact" class="label--accent link">Your product could be next ↗</a>
     </div>
   </div>
@@ -317,11 +281,132 @@
   </div>
 </section>
 
+<!-- ================= FAQ ================= -->
+<section class="section section--line" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label label--accent"><span>04 /</span> Questions</p>
+      <div>
+        <h2 class="h2 reveal">Before we start.</h2>
+        <p class="lead reveal">The questions founders and product teams ask us most often.</p>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="faq__list">
+        <details class="faq__item">
+          <summary><span class="faq__q">What does an industrial design studio do?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>We design physical products from the idea to mass production: research and concept sketches, 3D CAD, working prototypes, mechanisms such as hinges and latches, and the manufacturing files a factory needs to make the product.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">How long does it take to design a new product?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Concept design usually takes 2–4 weeks, and each prototype loop 1–3 weeks. A complete programme from first sketch to production parts typically runs several months, depending on how complex the product and its mechanisms are.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">How much does industrial design cost?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>It depends on the scope. You can hire us for a single stage — a concept, a prototype or a DFM review — or for the whole journey. Send us a short brief and we will reply with a proposal.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Do you sign an NDA before seeing my idea?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. We are happy to sign a non-disclosure agreement before you share any details of your product.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Can you help us manufacture the product?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. Design for manufacturing is part of our core work: we prepare tooling-ready CAD, choose materials and processes with you, work with your factory or our manufacturing partners, and support you through samples and first-article parts.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Do you work with startups and individual founders?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. We work with established brands, startups and individual founders. Many projects start with nothing more than a sketch or a competitor product you want to improve on.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Do you work with clients outside Israel?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. The studio is in Tel Aviv and we work with clients worldwide, remotely and on site with manufacturers.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">What should I send to get started?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>A short description of the product, who it is for and where the project is today. Sketches, photos, reference products or an existing prototype all help, but none of them are required.</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What does an industrial design studio do?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "We design physical products from the idea to mass production: research and concept sketches, 3D CAD, working prototypes, mechanisms such as hinges and latches, and the manufacturing files a factory needs to make the product."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long does it take to design a new product?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Concept design usually takes 2–4 weeks, and each prototype loop 1–3 weeks. A complete programme from first sketch to production parts typically runs several months, depending on how complex the product and its mechanisms are."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much does industrial design cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the scope. You can hire us for a single stage — a concept, a prototype or a DFM review — or for the whole journey. Send us a short brief and we will reply with a proposal."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you sign an NDA before seeing my idea?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. We are happy to sign a non-disclosure agreement before you share any details of your product."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can you help us manufacture the product?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Design for manufacturing is part of our core work: we prepare tooling-ready CAD, choose materials and processes with you, work with your factory or our manufacturing partners, and support you through samples and first-article parts."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you work with startups and individual founders?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. We work with established brands, startups and individual founders. Many projects start with nothing more than a sketch or a competitor product you want to improve on."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you work with clients outside Israel?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. The studio is in Tel Aviv and we work with clients worldwide, remotely and on site with manufacturers."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What should I send to get started?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A short description of the product, who it is for and where the project is today. Sketches, photos, reference products or an existing prototype all help, but none of them are required."
+   }
+  }
+ ]
+}
+  </script>
+</section>
+
 <!-- ================= CONTACT ================= -->
 <section class="section section--line" id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <p class="label label--accent"><span>04 /</span> Inquiry</p>
+      <p class="label label--accent"><span>05 /</span> Inquiry</p>
       <h2 class="h2 reveal">Let's talk about your project.</h2>
     </div>
     <div class="contact">
@@ -374,7 +459,7 @@
     </div>
     <nav aria-label="Footer">
       <p class="label">Index</p>
-      <a href="#work">Selected works</a><a href="#capabilities">Capabilities</a><a href="#studio">Studio</a><a href="#contact">Inquiry</a>
+      <a href="/projects/">All projects</a><a href="#capabilities">Capabilities</a><a href="#studio">Studio</a><a href="#contact">Inquiry</a>
     </nav>
     <div>
       <p class="label">Elsewhere</p>

@@ -1,6 +1,6 @@
 # KLIPYDESIGN.COM
 
-Website for KLIPYDESIGN, an industrial design studio in Tel Aviv. Plain HTML, CSS and JavaScript — no build step — hosted free on GitHub Pages.
+Website for KLIPYDESIGN, an industrial design studio in Tel Aviv. Plain HTML, CSS and JavaScript, hosted free on GitHub Pages. GitHub's built-in site builder (Jekyll) creates the project pages from the files in `_projects/`.
 
 ## Files
 
@@ -14,10 +14,16 @@ Website for KLIPYDESIGN, an industrial design studio in Tel Aviv. Plain HTML, CS
 
 ## Before launch
 
-1. **Photos** — replace `assets/img/project-*.svg`, `cap-*.svg` and `studio.svg` with real photos (product cut-outs as PNG/WebP work best on the coloured pills) and update the `src` in `index.html`.
-2. **Text in [brackets]** — project types, descriptions, specs and the client testimonial in `index.html`.
+1. **Photos** — project photos: see ADDING-PROJECTS.md. Capability and studio photos: replace `assets/img/cap-*.svg` and `studio.svg` and update the `src` in `index.html`.
+2. **Text in [brackets]** — in the project files (`_projects/`) and the client testimonial in `index.html`.
 3. **Check facts** — founding year (2009), stats, phone number, social links.
 4. **Contact form** — create a free form at formspree.io and paste its ID into `FORM_ENDPOINT` in `assets/js/main.js`. Until then the form opens the visitor's email app.
+
+## Projects
+
+Each project is a file in `_projects/` — see **ADDING-PROJECTS.md** for the step-by-step guide.
+GitHub Pages builds the project pages, the Projects list, the category cards, the homepage
+"Selected works" and the sitemap from those files automatically.
 
 ## Product categories
 
@@ -33,7 +39,7 @@ The coloured shapes in the hero are the five product categories. Each links to i
 
 ## Preview locally
 
-Run `python3 -m http.server` in this folder and visit http://localhost:8000.
+The simplest way is to commit and check the live site. To preview locally you need Jekyll (`bundle exec jekyll serve`).
 
 ## Publish (GitHub Pages)
 

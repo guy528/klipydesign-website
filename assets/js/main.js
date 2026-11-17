@@ -155,6 +155,25 @@
     restart();
   }
 
+  /* ---------- projects page: category filter ---------- */
+  const filters = $$('.filter');
+  if (filters.length) {
+    const cards = $$('#projectGrid .pcard');
+    const empty = $('#noProjects');
+    const apply = (cat) => {
+      let shown = 0;
+      cards.forEach((c) => { const on = cat === 'all' || c.dataset.cat === cat; c.hidden = !on; if (on) shown++; });
+      filters.forEach((f) => { const on = f.dataset.filter === cat; f.classList.toggle('is-on', on); f.setAttribute('aria-pressed', on); });
+      if (empty) empty.hidden = shown > 0;
+    };
+    filters.forEach((f) => f.addEventListener('click', () => {
+      apply(f.dataset.filter);
+      history.replaceState(null, '', f.dataset.filter === 'all' ? location.pathname : '#' + f.dataset.filter);
+    }));
+    const start = location.hash.slice(1);
+    if (start && filters.some((f) => f.dataset.filter === start)) apply(start);
+  }
+
   /* ---------- selected works accordion ---------- */
   const works = $$('.work');
   const openWork = (i) => works.forEach((w, j) => {

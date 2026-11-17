@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,7 +38,7 @@
       <span class="logo__word">KLIPY<b>DESIGN</b></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="/#work">Work</a>
+      <a href="/projects/">Projects</a>
       <a href="/#capabilities">Capabilities</a>
       <a href="/#studio">Studio</a>
       <a href="/#contact" class="nav__contact">Contact</a>
@@ -95,32 +98,13 @@
         <h2 class="h2 reveal">Products in this category.</h2>
       </div>
       <div class="pgrid stagger">
-        <article class="pcard">
-          <div class="pcard__panel" style="border-radius:50% 50% 24px 24px">
-            <img src="/assets/img/categories/consumer-electronics-light.svg" alt="[Product name] — [Product type] by KLIPYDESIGN" width="400" height="400" loading="lazy">
-            <span class="pcard__ph label">Product photo</span>
-          </div>
-          <p class="label">05.1 · [Product type]</p>
-          <h3>[Product name]</h3>
-          <p>[One line on the brief and what KLIPYDESIGN delivered.]</p>
-        </article>
-        <article class="pcard">
-          <div class="pcard__panel" style="border-radius:140px 0 0 0">
-            <img src="/assets/img/categories/consumer-electronics-light.svg" alt="[Product name] — [Product type] by KLIPYDESIGN" width="400" height="400" loading="lazy">
-            <span class="pcard__ph label">Product photo</span>
-          </div>
-          <p class="label">05.2 · [Product type]</p>
-          <h3>[Product name]</h3>
-          <p>[One line on the brief and what KLIPYDESIGN delivered.]</p>
-        </article>
-        <article class="pcard">
-          <div class="pcard__panel" style="border-radius:0 0 140px 0">
-            <img src="/assets/img/categories/consumer-electronics-light.svg" alt="[Product name] — [Product type] by KLIPYDESIGN" width="400" height="400" loading="lazy">
-            <span class="pcard__ph label">Product photo</span>
-          </div>
-          <p class="label">05.3 · [Product type]</p>
-          <h3>[Product name]</h3>
-          <p>[One line on the brief and what KLIPYDESIGN delivered.]</p>
+        {% assign items = site.projects | where: "category", "consumer-electronics" | sort: "order" %}
+        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
+        <article class="pcard pcard--next">
+          <a class="pcard__panel pcard__panel--cta" href="/#contact">
+            <span>Your electronics product, next.</span>
+            <span class="btn btn--dark btn--sm">Start a project →</span>
+          </a>
         </article>
       </div>
     </div>
@@ -169,7 +153,7 @@
     </nav>
     <div>
       <p class="label">Studio</p>
-      <a href="/#work">Selected works</a><a href="/#capabilities">Capabilities</a><a href="/#studio">Studio</a><a href="/#contact">Inquiry</a>
+      <a href="/projects/">All projects</a><a href="/#capabilities">Capabilities</a><a href="/#studio">Studio</a><a href="/#contact">Inquiry</a>
     </div>
   </div>
   <div class="wrap footer__bottom label">

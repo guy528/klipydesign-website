@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """
+Builds the five category pages. The project cards on each page are NOT set here: they come
+automatically from the project files in the _projects folder (see ADDING-PROJECTS.md).
+
 Builds the five category pages (kitchen/, lighting/, ...) from the data below.
 
 Edit the CATEGORIES list (names, text, products), then run from the repository root:
@@ -25,7 +28,6 @@ CATEGORIES = [
             ("Heat, steam and water", "Thermal breaks, venting paths and sealing details that hold up to daily use."),
             ("Easy to clean", "Fewer seams, reachable surfaces and removable parts that go in the dishwasher."),
         ],
-        "products": [("Aurelis", "Espresso machine"), ("[Product name]", "[Product type]"), ("[Product name]", "[Product type]")],
     },
     {
         "slug": "lighting", "num": "02", "name": "Lighting", "short": "Lighting",
@@ -37,7 +39,6 @@ CATEGORIES = [
             ("Thermal paths", "Housings that move LED heat away quietly — no fans, no hot spots."),
             ("Joints that hold", "Friction hinges and balanced arms that stay where you put them."),
         ],
-        "products": [("[Product name]", "[Product type]"), ("[Product name]", "[Product type]"), ("[Product name]", "[Product type]")],
     },
     {
         "slug": "defense", "num": "03", "name": "Defense", "short": "Defense",
@@ -49,7 +50,6 @@ CATEGORIES = [
             ("Usable under stress", "Controls, grips and interfaces sized for gloved hands, low light and fast, error-free use."),
             ("Ready for the supply chain", "Documentation, tolerances and manufacturing files prepared for qualified suppliers and long production runs."),
         ],
-        "products": [("[Product name]", "[Product type]"), ("[Product name]", "[Product type]"), ("[Product name]", "[Product type]")],
     },
     {
         "slug": "packaging", "num": "04", "name": "Packaging", "short": "Packaging",
@@ -61,7 +61,6 @@ CATEGORIES = [
             ("Line-ready", "Designed for filling lines, stacking and transport, with tooling cost in mind."),
             ("Less material", "Mono-materials, lighter walls and recyclable choices without losing strength."),
         ],
-        "products": [("[Product name]", "[Product type]"), ("[Product name]", "[Product type]"), ("[Product name]", "[Product type]")],
     },
     {
         "slug": "consumer-electronics", "num": "05", "name": "Consumer electronics", "short": "Electronics",
@@ -73,7 +72,6 @@ CATEGORIES = [
             ("Feel of quality", "Button travel, click and surface finish tuned to feel precise."),
             ("Assembly that scales", "Snap-fits, screws and seals planned for fast, repeatable assembly."),
         ],
-        "products": [("[Product name]", "[Product type]"), ("[Product name]", "[Product type]"), ("[Product name]", "[Product type]")],
     },
 ]
 
@@ -88,7 +86,7 @@ HEADER = '''<a class="skip" href="#main">Skip to content</a>
       <span class="logo__word">KLIPY<b>DESIGN</b></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="/#work">Work</a>
+      <a href="/projects/">Projects</a>
       <a href="/#capabilities">Capabilities</a>
       <a href="/#studio">Studio</a>
       <a href="/#contact" class="nav__contact">Contact</a>
@@ -113,7 +111,7 @@ FOOTER = '''<footer class="footer">
     </nav>
     <div>
       <p class="label">Studio</p>
-      <a href="/#work">Selected works</a><a href="/#capabilities">Capabilities</a><a href="/#studio">Studio</a><a href="/#contact">Inquiry</a>
+      <a href="/projects/">All projects</a><a href="/#capabilities">Capabilities</a><a href="/#studio">Studio</a><a href="/#contact">Inquiry</a>
     </div>
   </div>
   <div class="wrap footer__bottom label">
@@ -136,18 +134,20 @@ def page(i, c):
     points = "\n".join(
         f'        <article><span class="label">0{j + 1}</span><h3>{e(h)}</h3><p>{e(p)}</p></article>'
         for j, (h, p) in enumerate(c["points"]))
-    products = "\n".join(f'''        <article class="pcard">
-          <div class="pcard__panel" style="border-radius:{CARD_SHAPES[(i + j) % len(CARD_SHAPES)]}">
-            <img src="/assets/img/categories/{c["slug"]}-{c["art"]}.svg" alt="{e(name)} — {e(ptype)} by KLIPYDESIGN" width="400" height="400" loading="lazy">
-            <span class="pcard__ph label">Product photo</span>
-          </div>
-          <p class="label">{c["num"]}.{j + 1} · {e(ptype)}</p>
-          <h3>{e(name)}</h3>
-          <p>[One line on the brief and what KLIPYDESIGN delivered.]</p>
-        </article>''' for j, (name, ptype) in enumerate(c["products"]))
+    # Project cards are filled in by GitHub's site builder from the _projects folder.
+    products = (
+        '        {% assign items = site.projects | where: "category", "' + c["slug"] + '" | sort: "order" %}\n'
+        '        {% for p in items %}{% include project-card.html p=p %}{% endfor %}\n'
+        '        <article class="pcard pcard--next">\n'
+        '          <a class="pcard__panel pcard__panel--cta" href="/#contact">\n'
+        '            <span>Your ' + e(c["short"].lower()) + ' product, next.</span>\n'
+        '            <span class="btn btn--dark btn--sm">Start a project →</span>\n'
+        '          </a>\n'
+        '        </article>'
+    )
     title = f'{c["name"]} Design | KLIPYDESIGN Industrial Design Studio'
     desc = f'{c["name"]} designed by KLIPYDESIGN.COM: {c["intro"]}'
-    return f'''<!doctype html>
+    return "---\nlayout: null\n---\n" + f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">

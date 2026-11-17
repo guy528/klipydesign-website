@@ -1,0 +1,23 @@
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <img class="footer__logo" src="/assets/img/logo/klipy-logo-128.png" alt="KLIPYDESIGN" width="64" height="64" loading="lazy">
+      <p class="label label--accent">Industrial design studio</p>
+      <p class="footer__pitch">Complete idea-to-product support for brands and founders.</p>
+      <a class="link" href="mailto:studio@klipydesign.com">studio@klipydesign.com</a>
+    </div>
+    <nav aria-label="Footer">
+      <p class="label">Categories</p>
+      {% for c in site.data.categories %}<a href="/{{ c.slug }}/">{{ c.name }}</a>{% endfor %}
+    </nav>
+    <div>
+      <p class="label">Studio</p>
+      <a href="/projects/">All projects</a><a href="/#capabilities">Capabilities</a><a href="/#studio">Studio</a><a href="/#contact">Inquiry</a>
+    </div>
+  </div>
+  <div class="wrap footer__bottom label">
+    <span>© <span id="year">{{ site.time | date: "%Y" }}</span> KLIPYDESIGN.COM</span>
+    <span>Tel Aviv, Israel — working worldwide</span>
+  </div>
+</footer>
+<script src="/assets/js/main.js" defer></script>

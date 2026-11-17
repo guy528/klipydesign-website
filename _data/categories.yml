@@ -1,0 +1,22 @@
+# The five product categories. "slug" is the web address (klipydesign.com/<slug>/).
+# Use one of these slugs in the "category:" line of a project file.
+- slug: kitchen
+  name: Kitchen products
+  color: red
+  ink: "#fff"
+- slug: lighting
+  name: Lighting
+  color: yellow
+  ink: "#111111"
+- slug: defense
+  name: Defense
+  color: navy
+  ink: "#fff"
+- slug: packaging
+  name: Packaging
+  color: teal
+  ink: "#111111"
+- slug: consumer-electronics
+  name: Consumer electronics
+  color: steel
+  ink: "#fff"

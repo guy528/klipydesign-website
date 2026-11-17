@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ include.title }}</title>
+<meta name="description" content="{{ include.description | strip_html | strip_newlines | truncate: 300 }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+{% if include.noindex %}<meta name="robots" content="noindex">{% endif %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KLIPYDESIGN.COM">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:title" content="{{ include.title }}">
+<meta property="og:description" content="{{ include.description | strip_html | strip_newlines | truncate: 200 }}">
+<meta property="og:image" content="{{ site.url }}{{ include.image | default: '/assets/img/og-image.png' }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>document.documentElement.classList.add('js');</script>

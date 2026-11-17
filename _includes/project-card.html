@@ -1,0 +1,10 @@
+{% assign pc = site.data.categories | where: "slug", include.p.category | first %}
+<article class="pcard" data-cat="{{ include.p.category }}">
+  <a class="pcard__panel" href="{{ include.p.url }}" style="--c:var(--{{ pc.color | default: 'navy' }});--ink:{{ pc.ink | default: '#fff' }}" aria-label="{{ include.p.title }} — view project">
+    <img src="{{ include.p.cover }}" alt="{{ include.p.cover_alt | default: include.p.title }}" width="800" height="800" loading="lazy">
+    <span class="pcard__arrow" aria-hidden="true">↗</span>
+  </a>
+  <p class="label">{{ pc.name }} · {{ include.p.type }}</p>
+  <h3><a href="{{ include.p.url }}">{{ include.p.title }}</a></h3>
+  <p>{{ include.p.summary }}</p>
+</article>

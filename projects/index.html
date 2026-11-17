@@ -1,0 +1,47 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+{% include head.html title="Projects — Industrial Design Portfolio | KLIPYDESIGN" description="Selected industrial design projects by KLIPYDESIGN: kitchen products, lighting, defense, packaging and consumer electronics — from concept to mass production." %}
+</head>
+<body>
+{% include header.html %}
+
+<main id="main">
+  <section class="cat-hero">
+    <div class="wrap">
+      <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Projects</p>
+      <h1 class="cat-hero__title">Projects<span style="color:var(--red)">.</span></h1>
+      <p class="hero__sub">Products we have taken from a first sketch to the factory floor. Filter by category or open any project for the full story.</p>
+      <div class="filters" role="group" aria-label="Filter projects by category">
+        <button type="button" class="filter is-on" data-filter="all" aria-pressed="true">All</button>
+        {% for c in site.data.categories %}
+        <button type="button" class="filter" data-filter="{{ c.slug }}" aria-pressed="false" style="--c:var(--{{ c.color }});--ink:{{ c.ink }}">{{ c.name }}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--line">
+    <div class="wrap">
+      {% assign all = site.projects | sort: "order" %}
+      <div class="pgrid stagger" id="projectGrid">
+        {% for p in all %}{% include project-card.html p=p %}{% endfor %}
+      </div>
+      <p class="label" id="noProjects" hidden>No projects in this category yet — <a class="link" href="/#contact">yours could be the first</a>.</p>
+    </div>
+  </section>
+
+  <section class="cat-cta" style="--c:var(--red);--ink:#fff">
+    <div class="wrap cat-cta__inner">
+      <h2>Your product could be next.</h2>
+      <a class="btn btn--dark magnetic" href="/#contact">Let's talk about your project <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+{% include footer.html %}
+</body>
+</html>
