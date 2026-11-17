@@ -3,7 +3,7 @@
 title: Nova Sense
 category: packaging            # kitchen, lighting, defense, packaging or consumer-electronics
 type: "[Product type]"
-order: 2                  # position in lists (1 = first)
+order: 3                  # position in lists (1 = first)
 featured: true            # true = show in "Selected works" on the homepage
 year: "[Year]"
 client: "[Client name or 'Confidential']"
