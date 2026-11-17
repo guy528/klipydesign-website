@@ -16,6 +16,8 @@ gallery:
     caption: Potatoes, pasta and vegetables in their own baskets
   - image: /assets/img/projects/collapsible-cooker-steamer/in-the-pot.jpg
     caption: Baskets hooked onto the pot rim
+  - image: /assets/img/projects/collapsible-cooker-steamer/expanded-and-collapsed.jpg
+    caption: Expanded for cooking, collapsed flat for storage
   - image: /assets/img/projects/collapsible-cooker-steamer/concept-sketch.jpg
     caption: Concept sketch — collapsible tiers, hinge and fit in a standard pot
     wide: true
