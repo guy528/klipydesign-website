@@ -3,7 +3,7 @@
    Colours, fonts and spacing are set once here in :root.
    ========================================================= */
 :root{
-  --red:#E63946;
+  --red:#F32836;          /* logo red */
   --teal:#A8DADC;
   --navy:#1D3557;
   --yellow:#FFD166;
@@ -71,6 +71,8 @@ button{font:inherit;color:inherit}
 .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
 .header__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo__img{width:40px;height:40px;flex:none;transition:transform .6s var(--ease)}
+.logo:hover .logo__img{transform:rotate(-12deg)}
 .logo__mark{display:flex;align-items:flex-end;gap:3px;height:20px}
 .logo__mark i{display:block;width:5px;border-radius:3px}
 .logo__mark i:nth-child(1){height:20px;background:var(--red)}
@@ -256,6 +258,7 @@ button{font:inherit;color:inherit}
 /* ---------- footer ---------- */
 .footer{background:var(--sand);padding:72px 0 28px;border-top:1px solid var(--line)}
 .footer__grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:40px}
+.footer__logo{width:64px;height:64px;margin-bottom:20px}
 .footer__pitch{margin:12px 0 16px;font-size:18px;max-width:28ch}
 .footer nav,.footer__grid > div:last-child{display:flex;flex-direction:column;gap:10px}
 .footer__grid a:not(.link){font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink-2);padding:3px 0}
