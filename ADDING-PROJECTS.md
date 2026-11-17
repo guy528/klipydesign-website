@@ -12,10 +12,16 @@ itself in about a minute, and the project appears:
 
 ## Step 1 — Upload the photos
 
-1. Open the repository on github.com → go into `assets/img/projects/`.
-2. Click **Add file → Upload files**.
-3. At the top, type a folder name before the files, e.g. `smart-kettle/` — GitHub creates the folder.
-4. Drag in the photos and click **Commit changes**.
+1. On your computer, make a folder named after the project — lower case with dashes,
+   e.g. `smart-kettle` — and put the photos in it.
+2. On github.com, open the repository → `assets` → `img` → `projects`.
+3. Click **Add file → Upload files**.
+4. Drag the **whole folder** (not just the photos) into the upload area. GitHub keeps the
+   folder, so the photos land in `assets/img/projects/smart-kettle/`.
+5. Click **Commit changes**.
+
+To add photos to a project that already has a folder (e.g. `aurelis`), open that folder
+first, then **Add file → Upload files** and drag in just the photos.
 
 Photo tips:
 - **Cover**: a clean product shot. A cut-out on a transparent background (PNG/WebP) looks best on the coloured panels.
