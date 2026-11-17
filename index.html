@@ -57,9 +57,10 @@
       <a href="#studio">Studio</a>
       <a href="#contact" class="nav__contact">Contact</a>
     </nav>
-    <a class="btn btn--dark btn--sm header__cta" href="#contact"><span class="dot" aria-hidden="true"></span>Let's talk</a>
+    <a class="btn btn--dark btn--sm header__cta magnetic" href="#contact"><span class="dot" aria-hidden="true"></span>Let's talk</a>
     <button class="burger" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span></span><span></span></button>
   </div>
+  <span class="header__progress" aria-hidden="true"></span>
 </header>
 
 <main id="main">
@@ -77,24 +78,45 @@
       </h1>
       <p class="hero__sub">Complete idea-to-product support for brands and founders. Concept, mechanism and tooling run by the same team — from the first sketch to the first article.</p>
       <div class="hero__ctas">
-        <a class="btn btn--dark" href="#contact">Start a project <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="#work">Selected works</a>
+        <a class="btn btn--dark magnetic" href="#contact">Start a project <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost magnetic" href="#work">Selected works</a>
       </div>
     </div>
 
-    <div class="hero__chart">
-      <ul class="bars" role="list">
-        <!-- Each bar links to its project in Selected Works -->
-        <li><a class="bar" href="#work" data-open="0" style="--c:var(--red);--ink:#fff;--h:56%"><span class="bar__num">01</span><span class="bar__info"><b>Aurelis</b><span>Espresso machine</span></span></a></li>
-        <li><a class="bar" href="#work" data-open="1" style="--c:var(--teal);--ink:var(--ink-1);--h:86%"><span class="bar__num">02</span><span class="bar__info"><b>Nova Sense</b><span>[Product type]</span></span></a></li>
-        <li><a class="bar" href="#work" data-open="2" style="--c:var(--navy);--ink:#fff;--h:68%"><span class="bar__num">03</span><span class="bar__info"><b>Atlas</b><span>[Product type]</span></span></a></li>
-        <li><a class="bar" href="#work" data-open="3" style="--c:var(--yellow);--ink:var(--ink-1);--h:100%"><span class="bar__num">04</span><span class="bar__info"><b>Kinetic</b><span>[Product type]</span></span></a></li>
-        <li><a class="bar" href="#work" data-open="4" style="--c:var(--steel);--ink:#fff;--h:62%"><span class="bar__num">05</span><span class="bar__info"><b>Vital</b><span>[Product type]</span></span></a></li>
-      </ul>
-      <div class="chart__foot label">
-        <span>Five programmes · hover to preview · click to open</span>
-        <span>2023 — 2025</span>
+    <div class="hero__mosaic">
+      <!-- Each colour is a product category. Hover = faint product image, click = category page.
+           To use real photos, replace the images in assets/img/categories/ and update the src. -->
+      <nav class="mosaic" id="mosaic" aria-label="Product categories">
+        <a class="tile" href="/kitchen/" data-name="Kitchen products" style="--c:var(--red);--ink:#fff">
+          <img class="tile__img" src="/assets/img/categories/kitchen-light.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">01</span><b>Kitchen</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/lighting/" data-name="Lighting" style="--c:var(--yellow);--ink:var(--ink-1)">
+          <img class="tile__img" src="/assets/img/categories/lighting-dark.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">02</span><b>Lighting</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/protective-gear/" data-name="Protective gear" style="--c:var(--navy);--ink:#fff">
+          <img class="tile__img" src="/assets/img/categories/protective-gear-light.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">03</span><b>Protective gear</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/packaging/" data-name="Packaging" style="--c:var(--teal);--ink:var(--ink-1)">
+          <img class="tile__img" src="/assets/img/categories/packaging-dark.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">04</span><b>Packaging</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/consumer-electronics/" data-name="Consumer electronics" style="--c:var(--steel);--ink:#fff">
+          <img class="tile__img" src="/assets/img/categories/consumer-electronics-light.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">05</span><b>Electronics</b><span class="tile__go">Explore →</span></span>
+        </a>
+      </nav>
+      <div class="mosaic__bar">
+        <p class="label mosaic__caption" id="mosaicCaption" aria-live="polite">Five categories · hover to preview · click to explore</p>
+        <div class="mosaic__ctrl">
+          <span class="label mosaic__name" id="mosaicName">Skyline</span>
+          <span class="mosaic__dots" id="mosaicDots"></span>
+          <button class="mosaic__pause" id="mosaicPause" type="button" aria-pressed="false">Pause</button>
+        </div>
       </div>
+      <div class="mosaic__cursor" id="mosaicCursor" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -120,7 +142,7 @@
             <p class="label">01 · Espresso machine</p>
             <h3>Aurelis</h3>
             <p>[One or two lines on the brief, the challenge and what KLIPYDESIGN delivered.]</p>
-            <dl class="specs"><div><dt>Scope</dt><dd>[Concept · Mechanism · DFM]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div></dl>
+            <dl class="specs"><div><dt>Scope</dt><dd>[Concept · Mechanism · DFM]</dd></div><div><dt>Materials</dt><dd>[Materials]</dd></div><div><dt>Category</dt><dd><a class="link" href="/kitchen/">Kitchen products</a></dd></div></dl>
           </div>
         </div>
       </article>
@@ -203,7 +225,7 @@
         <span class="caps__fignum">Fig. <b id="capNum">01</b></span>
       </figure>
 
-      <div class="caps__list" id="caps">
+      <div class="caps__list stagger" id="caps">
         <div class="cap is-open">
           <h3><button aria-expanded="true" aria-controls="c0"><span class="cap__num">01</span>Concept Design<span class="cap__icon" aria-hidden="true"></span></button></h3>
           <div class="cap__body" id="c0"><div>
@@ -246,7 +268,7 @@
       <h2 class="h3">Brief in,<br>product out.</h2>
       <p class="muted">Six stages, one team. Nothing is handed off — the people who sketch it are the people who sign off the tooling.</p>
     </div>
-    <ol class="steps" id="steps">
+    <ol class="steps stagger" id="steps">
       <li><span class="steps__n">01</span><div><h3>Idea</h3><p>Brief, research, goals and constraints.</p></div></li>
       <li><span class="steps__n">02</span><div><h3>Concept</h3><p>Sketches, form and CMF direction.</p></div></li>
       <li><span class="steps__n">03</span><div><h3>CAD</h3><p>Engineered, production-grade 3D.</p></div></li>
@@ -269,7 +291,7 @@
         <p>KLIPYDESIGN is an industrial design studio building consumer products for brands and founders. Our work starts where a business case meets a physical constraint — and ends when the moulded part comes out of the tool the way it left our screen.</p>
         <p>That means complete idea-to-product support: form, mechanism, tolerances, tooling and the assembly documentation the factory actually reads. No handoffs between three vendors, no surprises at T1.</p>
         <!-- CHECK these figures before launch -->
-        <dl class="stats">
+        <dl class="stats stagger">
           <div><dt>Years in practice</dt><dd data-count="since" data-since="2009">17</dd></div>
           <div><dt>Products shipped</dt><dd><span data-count="140">140</span>+</dd></div>
           <div><dt>Manufacturing partners</dt><dd data-count="12">12</dd></div>

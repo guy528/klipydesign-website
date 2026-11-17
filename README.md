@@ -19,9 +19,21 @@ Website for KLIPYDESIGN, an industrial design studio in Tel Aviv. Plain HTML, CS
 3. **Check facts** — founding year (2009), stats, phone number, social links.
 4. **Contact form** — create a free form at formspree.io and paste its ID into `FORM_ENDPOINT` in `assets/js/main.js`. Until then the form opens the visitor's email app.
 
+## Product categories
+
+The coloured shapes in the hero are the five product categories. Each links to its own page
+(`kitchen/`, `lighting/`, `protective-gear/`, `packaging/`, `consumer-electronics/`).
+
+- **Category text and products** live in `tools/build_categories.py`. Edit the `CATEGORIES` list and run
+  `python3 tools/build_categories.py` to rebuild the five pages.
+- **Hover images**: `assets/img/categories/*-light.svg` / `*-dark.svg` are line-drawing placeholders.
+  Replace them with real product photos (JPG/WebP) and update the `src` in `index.html` and in the build script.
+- **Shapes and timing**: the four mosaic layouts and the speed (`MORPH_EVERY_MS`) are at the top of the
+  mosaic section in `assets/js/main.js`.
+
 ## Preview locally
 
-Open `index.html` in a browser, or run `python3 -m http.server` in this folder and visit http://localhost:8000.
+Run `python3 -m http.server` in this folder and visit http://localhost:8000.
 
 ## Publish (GitHub Pages)
 

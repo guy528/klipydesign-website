@@ -1,4 +1,4 @@
-/* KLIPYDESIGN.COM — interactions (no dependencies) */
+/* KLIPYDESIGN.COM — interactions (no dependencies). Runs on the homepage and the category pages. */
 (() => {
   'use strict';
 
@@ -7,56 +7,166 @@
   // Until then, the form opens the visitor's email app with the brief filled in.
   const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   const CONTACT_EMAIL = 'studio@klipydesign.com';
+  const MORPH_EVERY_MS = 3600; // how often the hero mosaic changes shape
   /* ------------------------------------------ */
 
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const root = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   requestAnimationFrame(() => setTimeout(() => root.classList.add('is-ready'), 60));
-  $('#year').textContent = new Date().getFullYear();
+  const year = $('#year');
+  if (year) year.textContent = new Date().getFullYear();
 
   /* ---------- mobile menu ---------- */
   const burger = $('.burger');
   const setMenu = (open) => {
     root.classList.toggle('menu-open', open);
+    if (!burger) return;
     burger.setAttribute('aria-expanded', open);
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   };
-  burger.addEventListener('click', () => setMenu(!root.classList.contains('menu-open')));
+  if (burger) burger.addEventListener('click', () => setMenu(!root.classList.contains('menu-open')));
   $$('#nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  /* ---------- scroll progress + active section in the menu ---------- */
+  const progress = $('.header__progress');
+  const navLinks = $$('#nav a[href^="#"]');
+  const watched = navLinks.map((a) => $(a.getAttribute('href'))).filter(Boolean);
+  const onScroll = () => {
+    const max = root.scrollHeight - innerHeight;
+    if (progress) progress.style.setProperty('--p', max > 0 ? (scrollY / max).toFixed(4) : 0);
+    let current = null;
+    watched.forEach((sec) => { if (sec.getBoundingClientRect().top < innerHeight * 0.4) current = sec.id; });
+    navLinks.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === '#' + current));
+    stepsFill();
+  };
+
+  /* ---------- magnetic buttons ---------- */
+  if (fine && !reduce) $$('.magnetic').forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.18}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+
+  /* ---------- hero: morphing category mosaic ---------- */
+  const mosaic = $('#mosaic');
+  if (mosaic) {
+    const tiles = $$('.tile', mosaic);
+    const caption = $('#mosaicCaption');
+    if (!fine) caption.textContent = 'Five categories · tap a colour to explore';
+    const captionDefault = caption.textContent;
+    const nameEl = $('#mosaicName');
+    const dotsEl = $('#mosaicDots');
+    const pauseBtn = $('#mosaicPause');
+    const cursor = $('#mosaicCursor');
+
+    // Layouts on a 10 × 10 grid: [x, y, w, h, shape]. shape: 'p' pill, 'c' circle, 'r' rectangle,
+    // or [tl, tr, br, bl] = which corners become a full quarter-circle.
+    const LAYOUTS = [
+      { name: 'Skyline', tiles: [[0, 4.4, 2, 5.6, 'p'], [2, 1.4, 2, 8.6, 'p'], [4, 3.2, 2, 6.8, 'p'], [6, 0, 2, 10, 'p'], [8, 3.8, 2, 6.2, 'p']] },
+      { name: 'Grid', tiles: [[0, 0, 4, 6, 'r'], [4, 0, 6, 4, 'r'], [4, 4, 3, 6, 'r'], [0, 6, 4, 4, 'r'], [7, 4, 3, 6, 'r']] },
+      { name: 'Bauhaus', tiles: [[0, 0, 4, 6, [0, 0, 0, 1]], [4, 0, 6, 4, [0, 1, 1, 0]], [4, 4, 3, 6, [1, 1, 0, 0]], [0, 6, 4, 4, [1, 0, 0, 0]], [7, 4, 3, 6, [0, 0, 1, 0]]] },
+      { name: 'Orbit', tiles: [[0, 0, 4.5, 4.5, 'c'], [4.8, 0.7, 2.8, 2.8, 'c'], [4.5, 4, 5.5, 5.5, 'c'], [0.5, 5, 3.5, 3.5, 'c'], [7.6, 0, 2.4, 2.4, 'c']] }
+    ];
+    let current = 0, hovered = null, paused = reduce, inView = true, timer = null;
+
+    const dots = LAYOUTS.map((l, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Show the ${l.name} layout`);
+      b.innerHTML = '<i></i>';
+      b.addEventListener('click', () => { current = i; render(); restart(); });
+      dotsEl.appendChild(b);
+      return b;
+    });
+
+    function render() {
+      const W = mosaic.clientWidth, H = mosaic.clientHeight;
+      const u = W / 10, v = H / 10, g = Math.max(8, Math.round(W / 60));
+      LAYOUTS[current].tiles.forEach(([x, y, w, h, shape], i) => {
+        const t = tiles[i];
+        const pw = w * u - g, ph = h * v - g, m = Math.min(pw, ph);
+        let r;
+        if (shape === 'p') r = '999px';
+        else if (shape === 'c') r = '50%';
+        else if (shape === 'r') r = '6px';
+        else r = shape.map((f) => (f ? m + 'px' : '6px')).join(' ');
+        Object.assign(t.style, { left: x * u + g / 2 + 'px', top: y * v + g / 2 + 'px', width: pw + 'px', height: ph + 'px', borderRadius: r });
+        t.classList.toggle('is-tall', pw / ph < 0.62);
+        t.classList.toggle('is-round', shape === 'c');
+        t.classList.toggle('is-small', m < 170);
+        t.classList.toggle('label-top', Array.isArray(shape) && (shape[2] || shape[3]) && !shape[0] && !shape[1]);
+      });
+      nameEl.textContent = LAYOUTS[current].name;
+      dots.forEach((d, i) => d.setAttribute('aria-current', i === current));
+    }
+    function next() { current = (current + 1) % LAYOUTS.length; render(); }
+    function restart() {
+      clearInterval(timer);
+      timer = setInterval(() => { if (!paused && hovered === null && inView && !document.hidden) next(); }, MORPH_EVERY_MS);
+    }
+    pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'Play' : 'Pause';
+      pauseBtn.setAttribute('aria-pressed', paused);
+    });
+    if (reduce) { pauseBtn.textContent = 'Play'; pauseBtn.setAttribute('aria-pressed', 'true'); }
+
+    const enter = (t, i) => {
+      hovered = i;
+      mosaic.classList.add('has-hover');
+      tiles.forEach((x) => x.classList.toggle('is-hover', x === t));
+      caption.textContent = `${String(i + 1).padStart(2, '0')} · ${t.dataset.name} — click to explore`;
+      if (cursor) cursor.textContent = `Explore ${t.dataset.name} →`;
+    };
+    const leave = () => {
+      hovered = null;
+      mosaic.classList.remove('has-hover');
+      tiles.forEach((x) => x.classList.remove('is-hover'));
+      caption.textContent = captionDefault;
+      if (cursor) cursor.classList.remove('on');
+    };
+    tiles.forEach((t, i) => {
+      t.addEventListener('mouseenter', () => enter(t, i));
+      t.addEventListener('focus', () => enter(t, i));
+      t.addEventListener('mouseleave', leave);
+      t.addEventListener('blur', leave);
+      // entrance: scale in one after another
+      t.style.transitionDelay = `0s,0s,0s,0s,0s,0s,${0.25 + i * 0.08}s,0s`;
+      setTimeout(() => { t.style.transitionDelay = ''; }, 1600);
+    });
+    if (fine && cursor) {
+      mosaic.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 34 + 'px';
+        if (hovered !== null) cursor.classList.add('on');
+      });
+    }
+    new IntersectionObserver(([en]) => { inView = en.isIntersecting; }).observe(mosaic);
+    let rT;
+    addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(render, 100); });
+    render();
+    restart();
+  }
 
   /* ---------- selected works accordion ---------- */
   const works = $$('.work');
   const openWork = (i) => works.forEach((w, j) => {
-    const on = i === j;
-    w.classList.toggle('is-open', on);
-    $('.work__tab', w).setAttribute('aria-expanded', on);
+    w.classList.toggle('is-open', i === j);
+    $('.work__tab', w).setAttribute('aria-expanded', i === j);
   });
   works.forEach((w, i) => $('.work__tab', w).addEventListener('click', () => openWork(i)));
-
-  /* ---------- hero bars: preview + open project ---------- */
-  const foot = $('.chart__foot span');
-  const footDefault = foot.textContent;
-  $$('.bar').forEach((bar) => {
-    const name = $('.bar__info b', bar).textContent;
-    const type = $('.bar__info span', bar).textContent;
-    const num = $('.bar__num', bar).textContent;
-    const show = () => { foot.textContent = `${num} · ${name} — ${type} · click to open`; };
-    const hide = () => { foot.textContent = footDefault; };
-    bar.addEventListener('mouseenter', show);
-    bar.addEventListener('focus', show);
-    bar.addEventListener('mouseleave', hide);
-    bar.addEventListener('blur', hide);
-    bar.addEventListener('click', () => openWork(+bar.dataset.open));
-  });
 
   /* ---------- capabilities accordion + figure swap ---------- */
   const caps = $$('.cap');
   const figs = $$('.caps__fig img');
-  const names = ['Concept design', '3D prototyping', 'Functional mechanisms', 'Design for manufacturing'];
+  const capNames = ['Concept design', '3D prototyping', 'Functional mechanisms', 'Design for manufacturing'];
   caps.forEach((cap, i) => {
     $('button', cap).addEventListener('click', () => {
       caps.forEach((c, j) => {
@@ -65,9 +175,9 @@
       });
       figs.forEach((f, j) => f.classList.toggle('is-on', i === j));
       const n = String(i + 1).padStart(2, '0');
-      $('#capNum').textContent = n;
-      $('#capCount').textContent = n;
-      $('#capTag').textContent = names[i];
+      if ($('#capNum')) $('#capNum').textContent = n;
+      if ($('#capCount')) $('#capCount').textContent = n;
+      if ($('#capTag')) $('#capTag').textContent = capNames[i];
     });
   });
 
@@ -77,7 +187,7 @@
     el.textContent = el.dataset.count;
   });
 
-  /* ---------- reveal on scroll + counters ---------- */
+  /* ---------- reveal on scroll, staggered groups, counters ---------- */
   const countUp = (el) => {
     const end = +el.dataset.count;
     if (reduce || !end) return;
@@ -89,68 +199,72 @@
     };
     requestAnimationFrame(step);
   };
+  $$('.stagger').forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty('--i', i)));
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (!en.isIntersecting) return;
     en.target.classList.add('in');
-    if (en.target.matches('.stats')) $$('[data-count]', en.target).forEach(countUp);
+    $$('[data-count]', en.target).forEach(countUp);
     io.unobserve(en.target);
-  }), { threshold: 0.2 });
-  $$('.reveal, .stats').forEach((el) => io.observe(el));
+  }), { threshold: 0.15 });
+  $$('.reveal, .stagger').forEach((el) => io.observe(el));
 
   /* ---------- process line fills as you scroll ---------- */
   const steps = $('#steps');
-  const items = $$('li', steps);
-  const onScroll = () => {
+  const items = steps ? $$('li', steps) : [];
+  function stepsFill() {
+    if (!steps) return;
     const r = steps.getBoundingClientRect();
     const p = Math.min(1, Math.max(0, (innerHeight * 0.7 - r.top) / r.height));
     steps.style.setProperty('--fill', p.toFixed(3));
     items.forEach((li, i) => li.classList.toggle('on', p >= i / (items.length - 1) - 0.001));
-  };
+  }
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
   /* ---------- contact form ---------- */
   const form = $('#brief');
-  const status = $('.form__status', form);
-  const submit = $('button[type=submit]', form);
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    status.className = 'form__status';
-    let ok = true;
-    $$('[required]', form).forEach((f) => {
-      const bad = !f.value.trim() || (f.type === 'email' && !/^\S+@\S+\.\S+$/.test(f.value));
-      f.closest('.field').classList.toggle('invalid', bad);
-      f.setAttribute('aria-invalid', bad);
-      if (bad && ok) { f.focus(); ok = false; }
+  if (form) {
+    const status = $('.form__status', form);
+    const submit = $('button[type=submit]', form);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'form__status';
+      let ok = true;
+      $$('[required]', form).forEach((f) => {
+        const bad = !f.value.trim() || (f.type === 'email' && !/^\S+@\S+\.\S+$/.test(f.value));
+        f.closest('.field').classList.toggle('invalid', bad);
+        f.setAttribute('aria-invalid', bad);
+        if (bad && ok) { f.focus(); ok = false; }
+      });
+      if (!ok) { status.classList.add('err'); status.textContent = 'Please add your name, a valid email and a few words about the project.'; return; }
+
+      const data = new FormData(form);
+      if (data.get('_gotcha')) return;
+
+      if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
+        const body = [
+          `Name: ${data.get('name')}`, `Email: ${data.get('email')}`, `Company: ${data.get('company') || '—'}`,
+          `Focus: ${data.getAll('focus').join(', ') || '—'}`, '', data.get('message')
+        ].join('\n');
+        location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Project brief — ' + data.get('name'))}&body=${encodeURIComponent(body)}`;
+        status.textContent = 'Opening your email app…';
+        return;
+      }
+
+      submit.disabled = true;
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(res.status);
+        form.reset();
+        status.classList.add('ok');
+        status.textContent = 'Thank you — your brief is in. We reply within one working day.';
+      } catch (err) {
+        status.classList.add('err');
+        status.textContent = `Something went wrong. Please email us at ${CONTACT_EMAIL}.`;
+      } finally {
+        submit.disabled = false;
+      }
     });
-    if (!ok) { status.classList.add('err'); status.textContent = 'Please add your name, a valid email and a few words about the project.'; return; }
-
-    const data = new FormData(form);
-    if (data.get('_gotcha')) return;
-
-    if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
-      const body = [
-        `Name: ${data.get('name')}`, `Email: ${data.get('email')}`, `Company: ${data.get('company') || '—'}`,
-        `Focus: ${data.getAll('focus').join(', ') || '—'}`, '', data.get('message')
-      ].join('\n');
-      location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Project brief — ' + data.get('name'))}&body=${encodeURIComponent(body)}`;
-      status.textContent = 'Opening your email app…';
-      return;
-    }
-
-    submit.disabled = true;
-    status.textContent = 'Sending…';
-    try {
-      const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-      if (!res.ok) throw new Error(res.status);
-      form.reset();
-      status.classList.add('ok');
-      status.textContent = 'Thank you — your brief is in. We reply within one working day.';
-    } catch (err) {
-      status.classList.add('err');
-      status.textContent = `Something went wrong. Please email us at ${CONTACT_EMAIL}.`;
-    } finally {
-      submit.disabled = false;
-    }
-  });
+  }
 })();
