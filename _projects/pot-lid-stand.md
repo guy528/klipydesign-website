@@ -16,7 +16,7 @@ gallery:
     caption: Lid and spoon resting together
   - image: /assets/img/projects/pot-lid-stand/tablet-stand.jpg
     caption: The same wave shape holds a tablet for following a recipe
-  - image: /assets/img/projects/pot-lid-stand/concept-sketch.jpg
+  - image: /assets/img/projects/pot-lid-stand/concept-sketch-2.jpg
     caption: Concept sketch — wave geometry, support channels and feet
     wide: true
 placeholder: false
