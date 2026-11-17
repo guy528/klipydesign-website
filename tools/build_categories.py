@@ -169,7 +169,7 @@ def page(i, c):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v={{{{ site.time | date: '%s' }}}}">
 <script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"Service","name":"{e(c["name"])} industrial design","serviceType":"Industrial design","provider":{{"@type":"ProfessionalService","name":"KLIPYDESIGN","url":"https://klipydesign.com/","logo":"https://klipydesign.com/assets/img/logo/klipy-logo-512.png"}},"areaServed":"Worldwide","description":"{e(c["intro"])}"}}
 </script>
@@ -249,7 +249,7 @@ def page(i, c):
 
 {FOOTER.format(cats=footer_cats)}
 
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v={{{{ site.time | date: '%s' }}}}" defer></script>
 </body>
 </html>
 '''
