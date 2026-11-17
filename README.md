@@ -22,7 +22,7 @@ Website for KLIPYDESIGN, an industrial design studio in Tel Aviv. Plain HTML, CS
 ## Product categories
 
 The coloured shapes in the hero are the five product categories. Each links to its own page
-(`kitchen/`, `lighting/`, `protective-gear/`, `packaging/`, `consumer-electronics/`).
+(`kitchen/`, `lighting/`, `defense/`, `packaging/`, `consumer-electronics/`).
 
 - **Category text and products** live in `tools/build_categories.py`. Edit the `CATEGORIES` list and run
   `python3 tools/build_categories.py` to rebuild the five pages.
