@@ -3,7 +3,7 @@
 title: Atlas
 category: defense            # kitchen, lighting, defense, packaging or consumer-electronics
 type: "[Product type]"
-order: 5                  # position in lists (1 = first)
+order: 6                  # position in lists (1 = first)
 featured: true            # true = show in "Selected works" on the homepage
 year: "[Year]"
 client: "[Client name or 'Confidential']"
