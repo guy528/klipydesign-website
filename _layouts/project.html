@@ -44,7 +44,7 @@
       </div>
     </div>
     <figure class="wrap proj-cover">
-      <div class="proj-cover__panel{% if page.photo %} is-photo{% endif %}">
+      <div class="proj-cover__panel{% if page.photo %} is-photo{% endif %}" style="--pos:{{ page.cover_position | default: '50% 50%' }}">
         <img src="{{ page.cover }}" alt="{{ page.cover_alt | default: page.title }}" width="1600" height="1000">
       </div>
     </figure>

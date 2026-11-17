@@ -16,6 +16,7 @@ materials: "PP, stainless steel"
 cover: /assets/img/projects/smart-kettle/cover.jpg
 cover_alt: "Smart kettle designed by KLIPYDESIGN"
 photo: true                # true = photos fill the coloured panels (use false for cut-out PNGs)
+cover_position: "50% 50%"  # optional — which part of the cover stays visible if cropped (left/top %)
 gallery:                   # optional — delete these lines if you have no extra photos
   - image: /assets/img/projects/smart-kettle/sketch.jpg
     caption: Early sketches

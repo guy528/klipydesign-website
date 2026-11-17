@@ -464,3 +464,7 @@ a.pcard__panel{display:grid;text-decoration:none;color:var(--ink)}
 
 /* tall (portrait) gallery photos: keep them a sensible height */
 .gallery__item img{max-height:760px;object-fit:contain;background:var(--sand)}
+
+/* project cover photos keep their own shape (no forced 16:9 crop) */
+.proj-cover__panel.is-photo{aspect-ratio:auto;max-height:92vh}
+.proj-cover__panel.is-photo img{height:100%;max-height:92vh;object-position:var(--pos,50% 50%)}
