@@ -3,7 +3,7 @@
 title: Kinetic
 category: lighting            # kitchen, lighting, defense, packaging or consumer-electronics
 type: "[Product type]"
-order: 9                  # position in lists (1 = first)
+order: 10                  # position in lists (1 = first)
 featured: true            # true = show in "Selected works" on the homepage
 year: "[Year]"
 client: "[Client name or 'Confidential']"

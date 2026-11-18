@@ -3,7 +3,7 @@
 title: Vital
 category: consumer-electronics            # kitchen, lighting, defense, packaging or consumer-electronics
 type: "[Product type]"
-order: 10                  # position in lists (1 = first)
+order: 11                  # position in lists (1 = first)
 featured: false           # true = show in "Selected works" on the homepage
 year: "[Year]"
 client: "[Client name or 'Confidential']"
