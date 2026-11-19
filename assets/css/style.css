@@ -570,3 +570,14 @@ a.pcard__panel{display:grid;text-decoration:none;color:var(--ink)}
 
 /* the kitchen icon animates itself (coffee pouring), so no extra float/glow */
 .glow-shape img[src*="kitchen-anim"]{animation:none}
+
+/* ---------- Hero background reel (low-opacity product clips) ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero__reel{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero__clip{position:absolute;inset:-4%;background:center/cover no-repeat;opacity:0;transform:scale(1.1) translateX(0);transition:opacity 1.8s ease,transform 8s linear;will-change:opacity,transform}
+.hero__clip:nth-child(even){transform:scale(1.1) translateX(-2%)}
+.hero__clip.is-on{opacity:.13;transform:scale(1) translateX(0)}
+.hero__clip:nth-child(even).is-on{transform:scale(1) translateX(2%)}
+.hero__reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 70%,#fff 100%)}
+@media (max-width:760px){.hero__clip.is-on{opacity:.1}}
+@media (prefers-reduced-motion:reduce){.hero__clip{transition:opacity .6s ease;transform:none!important}}
