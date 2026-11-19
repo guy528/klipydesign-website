@@ -4,7 +4,7 @@
   name: Kitchen products
   color: red
   ink: "#fff"
-  art: light
+  art: anim
   shape: "0 0 0 50%"
 
 - slug: lighting

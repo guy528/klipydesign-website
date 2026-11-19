@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CATEGORIES = [
     {
         "slug": "kitchen", "num": "01", "name": "Kitchen products", "short": "Kitchen",
-        "color": "red", "ink": "#fff", "art": "light",
+        "color": "red", "ink": "#fff", "art": "anim",
         "intro": "Appliances and tools that live on the counter and survive heat, steam, water and daily cleaning — designed to look calm and built to last.",
         "types": ["Espresso & coffee machines", "Kettles", "Blenders & mixers", "Cookware accessories", "Food storage"],
         "points": [

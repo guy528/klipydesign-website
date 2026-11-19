@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    /* Coffee machine: two streams pour, the cup fills, steam rises, then it starts again (5s loop) */
+    .stream{stroke-width:4;stroke-dasharray:7 7;animation:flow .45s linear infinite,pour 5s ease-in-out infinite}
+    .coffee{fill:#FFFFFF;stroke:none;transform-box:view-box;animation:fill 5s ease-in-out infinite}
+    .steam{stroke-width:4;opacity:0;transform-box:fill-box;animation:steam 5s ease-out infinite}
+    .steam.s2{animation-delay:.25s}
+    @keyframes flow{to{stroke-dashoffset:-14}}
+    @keyframes pour{0%,4%{opacity:0}9%,62%{opacity:1}68%,100%{opacity:0}}
+    @keyframes fill{0%,8%{transform:translateY(0);opacity:.92}64%,90%{transform:translateY(-42px);opacity:.92}100%{transform:translateY(-42px);opacity:0}}
+    @keyframes steam{0%,64%{opacity:0;transform:translateY(8px)}74%{opacity:1}92%,100%{opacity:0;transform:translateY(-14px)}}
+    @media (prefers-reduced-motion:reduce){.stream,.coffee,.steam{animation:none}.coffee{transform:translateY(-30px)}.stream{opacity:0}}
+  </style>
+  <defs>
+    <clipPath id="cup"><path d="M171 233h58l-7 45h-44z"/></clipPath>
+  </defs>
+  <!-- coffee rising inside the cup -->
+  <g clip-path="url(#cup)"><rect class="coffee" x="160" y="280" width="80" height="60"/></g>
+  <!-- machine -->
+  <rect x="110" y="80" width="180" height="40" rx="10"/>
+  <path d="M125 120v170M275 120v170"/>
+  <rect x="100" y="290" width="200" height="30" rx="8"/>
+  <rect x="170" y="120" width="60" height="40" rx="6"/>
+  <path d="M160 175h80M200 160v15M150 175c0 0-20 0-40 10"/>
+  <circle cx="260" cy="100" r="7"/>
+  <!-- coffee streams -->
+  <path class="stream" d="M191 180v52M209 180v52"/>
+  <!-- cup -->
+  <path d="M168 230h64l-8 50h-48z"/>
+  <path d="M232 240c18 0 18 26 0 26"/>
+  <!-- steam -->
+  <path class="steam" d="M188 222c-6-6 6-10 0-16"/>
+  <path class="steam s2" d="M212 222c-6-6 6-10 0-16"/>
+</svg>
