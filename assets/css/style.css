@@ -559,3 +559,11 @@ a.pcard__panel{display:grid;text-decoration:none;color:var(--ink)}
   .pp-hero__grid{grid-template-columns:1fr}
   .pp-hero__shape{max-width:240px;margin:8px 0 0}
 }
+
+/* the coloured shape stays still; only the icon inside it is animated */
+.glow-shape{animation:none;box-shadow:none}
+.glow-shape::before,.glow-shape::after{content:none}
+.glow-shape img{animation:iconFloat 4.5s ease-in-out infinite,iconGlow 4.5s ease-in-out infinite;transform-origin:50% 60%}
+@keyframes iconFloat{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -10px;rotate:-2deg}}
+@keyframes iconGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,0))}50%{filter:drop-shadow(0 0 10px rgba(255,255,255,.75))}}
+@media (prefers-reduced-motion:reduce){.glow-shape img{animation:none}}
