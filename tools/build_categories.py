@@ -190,7 +190,7 @@ def page(i, c):
           <a class="btn btn--ghost magnetic" href="#products">See the work</a>
         </div>
       </div>
-      <div class="cat-hero__shape" style="border-radius:{SHAPES[i]}">
+      <div class="cat-hero__shape glow-shape" style="border-radius:{SHAPES[i]}">
         <img src="/assets/img/categories/{c["slug"]}-{c["art"]}.svg" alt="" aria-hidden="true" width="400" height="400">
         <span class="label cat-hero__num">{c["num"]}</span>
       </div>

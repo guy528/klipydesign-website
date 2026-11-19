@@ -21,51 +21,44 @@
 {% include header.html %}
 
 <main id="main">
-  <section class="proj-hero">
+  <!-- Title block (layout inspired by editorial case-study pages) -->
+  <section class="pp-hero">
     <div class="wrap">
       <p class="label label--accent">
         <a class="link" href="/">Home</a> <span>/</span>
         <a class="link" href="/{{ cat.slug }}/">{{ cat.name }}</a> <span>/</span>
         {{ page.title }}
       </p>
-      <div class="proj-hero__grid">
-        <div>
-          <h1 class="cat-hero__title">{{ page.title }}<span style="color:var(--c)">.</span></h1>
-          <p class="hero__sub">{{ page.summary }}</p>
+      <h1 class="pp-title">{{ page.title }}<span style="color:var(--c)">.</span></h1>
+      <p class="pp-sub">{{ page.summary }}</p>
+      <dl class="pp-meta">
+        <div><dt>Product</dt><dd>{{ page.type }}</dd></div>
+        {% if page.client %}<div><dt>Client</dt><dd>{{ page.client }}</dd></div>{% endif %}
+        {% if page.year %}<div><dt>Year</dt><dd>{{ page.year }}</dd></div>{% endif %}
+        {% if page.scope %}<div><dt>Scope</dt><dd>{{ page.scope | join: " · " }}</dd></div>{% endif %}
+        {% if page.materials %}<div><dt>Materials</dt><dd>{{ page.materials }}</dd></div>{% endif %}
+        <div><dt>Category</dt><dd><a class="link" href="/{{ cat.slug }}/">{{ cat.name }}</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Story on the left (stays in view), images on the right -->
+  <section class="pp-content">
+    <div class="wrap pp-grid">
+      <aside class="pp-left">
+        <div class="pp-left__inner">
+          <div class="prose">
+            {{ content }}
+          </div>
+          <a class="btn btn--dark magnetic pp-left__cta" href="/#contact">Start a similar project <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <dl class="proj-specs">
-          <div><dt>Product</dt><dd>{{ page.type }}</dd></div>
-          {% if page.client %}<div><dt>Client</dt><dd>{{ page.client }}</dd></div>{% endif %}
-          {% if page.year %}<div><dt>Year</dt><dd>{{ page.year }}</dd></div>{% endif %}
-          {% if page.scope %}<div><dt>Scope</dt><dd>{{ page.scope | join: " · " }}</dd></div>{% endif %}
-          {% if page.materials %}<div><dt>Materials</dt><dd>{{ page.materials }}</dd></div>{% endif %}
-          <div><dt>Category</dt><dd><a class="link" href="/{{ cat.slug }}/">{{ cat.name }}</a></dd></div>
-        </dl>
-      </div>
-    </div>
-    <figure class="wrap proj-cover">
-      <div class="proj-cover__panel{% if page.photo %} is-photo{% endif %}" style="--pos:{{ page.cover_position | default: '50% 50%' }}">
-        <img src="{{ page.cover }}" alt="{{ page.cover_alt | default: page.title }}" width="1600" height="1000">
-      </div>
-    </figure>
-  </section>
-
-  <section class="section">
-    <div class="wrap proj-body">
-      <p class="label label--accent"><span>01 /</span> The project</p>
-      <div class="prose reveal">
-        {{ content }}
-      </div>
-    </div>
-  </section>
-
-  {% if page.gallery %}
-  <section class="section section--line">
-    <div class="wrap">
-      <p class="label label--accent" style="margin-bottom:32px"><span>02 /</span> Process &amp; details</p>
-      <div class="gallery stagger">
+      </aside>
+      <div class="pp-right">
+        <figure class="pp-shape glow-shape{% if page.photo %} is-photo{% endif %}">
+          <img src="{{ page.cover }}" alt="{{ page.cover_alt | default: page.title }}" style="object-position:{{ page.cover_position | default: '50% 50%' }}">
+        </figure>
         {% for g in page.gallery %}
-        <figure class="gallery__item{% if g.wide %} gallery__item--wide{% endif %}">
+        <figure class="pp-img reveal">
           <img src="{{ g.image }}" alt="{{ g.caption | default: page.title }}" loading="lazy">
           {% if g.caption %}<figcaption class="label">{{ g.caption }}</figcaption>{% endif %}
         </figure>
@@ -73,7 +66,6 @@
       </div>
     </div>
   </section>
-  {% endif %}
 
   <section class="cat-cta">
     <div class="wrap cat-cta__inner">
