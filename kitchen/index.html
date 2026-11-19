@@ -50,20 +50,23 @@ layout: null
 </header>
 
 <main id="main">
-  <section class="cat-hero">
-    <div class="wrap cat-hero__grid">
-      <div class="cat-hero__text">
-        <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Category 01 of 05</p>
-        <h1 class="cat-hero__title">Kitchen products<span style="color:var(--c)">.</span></h1>
-        <p class="hero__sub">Appliances and tools that live on the counter and survive heat, steam, water and daily cleaning — designed to look calm and built to last.</p>
-        <div class="hero__ctas">
-          <a class="btn btn--dark magnetic" href="/#contact">Start a kitchen project <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost magnetic" href="#products">See the work</a>
-        </div>
+  <!-- Products first: visitors see the work right under the breadcrumb -->
+  <section class="cat-top" id="products">
+    <div class="wrap">
+      <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Kitchen products</p>
+      <div class="cat-top__head">
+        <h1 class="cat-top__title"><span class="cat-badge" aria-hidden="true"></span>Kitchen products<span style="color:var(--c)">.</span></h1>
+        <p class="cat-top__intro">Appliances and tools that live on the counter and survive heat, steam, water and daily cleaning — designed to look calm and built to last.</p>
       </div>
-      <div class="cat-hero__shape" style="border-radius:0 0 0 50%">
-        <img src="/assets/img/categories/kitchen-light.svg" alt="" aria-hidden="true" width="400" height="400">
-        <span class="label cat-hero__num">01</span>
+      <div class="pgrid stagger">
+        {% assign items = site.projects | where: "category", "kitchen" | sort: "order" %}
+        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
+        <article class="pcard pcard--next">
+          <a class="pcard__panel pcard__panel--cta" href="/#contact">
+            <span>Your kitchen product, next.</span>
+            <span class="btn btn--dark btn--sm">Start a project →</span>
+          </a>
+        </article>
       </div>
     </div>
   </section>
@@ -87,25 +90,6 @@ layout: null
         <article><span class="label">01</span><h3>Food-safe by design</h3><p>Materials, finishes and seals specified for food contact from the first CAD model.</p></article>
         <article><span class="label">02</span><h3>Heat, steam and water</h3><p>Thermal breaks, venting paths and sealing details that hold up to daily use.</p></article>
         <article><span class="label">03</span><h3>Easy to clean</h3><p>Fewer seams, reachable surfaces and removable parts that go in the dishwasher.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--line" id="products">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="label label--accent"><span>02 /</span> Selected kitchen work</p>
-        <h2 class="h2 reveal">Products in this category.</h2>
-      </div>
-      <div class="pgrid stagger">
-        {% assign items = site.projects | where: "category", "kitchen" | sort: "order" %}
-        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
-        <article class="pcard pcard--next">
-          <a class="pcard__panel pcard__panel--cta" href="/#contact">
-            <span>Your kitchen product, next.</span>
-            <span class="btn btn--dark btn--sm">Start a project →</span>
-          </a>
-        </article>
       </div>
     </div>
   </section>

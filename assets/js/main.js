@@ -81,7 +81,7 @@
       b.type = 'button';
       b.setAttribute('aria-label', `Show the ${l.name} layout`);
       b.innerHTML = '<i></i>';
-      b.addEventListener('click', () => { current = i; render(); restart(); });
+      b.addEventListener('click', () => { morphTo(i); restart(); });
       dotsEl.appendChild(b);
       return b;
     });
@@ -106,7 +106,23 @@
       nameEl.textContent = LAYOUTS[current].name;
       dots.forEach((d, i) => d.setAttribute('aria-current', i === current));
     }
-    function next() { current = (current + 1) % LAYOUTS.length; render(); }
+    // Wave morph: each capsule starts a beat after the previous one, with a little squash
+    function morphTo(n) {
+      current = n;
+      if (!reduce) {
+        tiles.forEach((t, i) => {
+          const d = i * 0.07 + 's';
+          t.style.transitionDelay = `${d},${d},${d},${d},${d},0s,0s,0s`;
+          t.style.setProperty('--d', d);
+        });
+        mosaic.classList.remove('is-morphing'); void mosaic.offsetWidth; mosaic.classList.add('is-morphing');
+        clearTimeout(morphT);
+        morphT = setTimeout(() => { mosaic.classList.remove('is-morphing'); tiles.forEach((t) => { t.style.transitionDelay = ''; }); }, 1500);
+      }
+      render();
+    }
+    let morphT;
+    function next() { morphTo((current + 1) % LAYOUTS.length); }
     function restart() {
       clearInterval(timer);
       timer = setInterval(() => { if (!paused && hovered === null && inView && !document.hidden) next(); }, MORPH_EVERY_MS);
@@ -141,6 +157,18 @@
       t.style.transitionDelay = `0s,0s,0s,0s,0s,0s,${0.25 + i * 0.08}s,0s`;
       setTimeout(() => { t.style.transitionDelay = ''; }, 1600);
     });
+    tiles.forEach((t, i) => t.style.setProperty('--i', i));
+    // 3D tilt: the whole composition leans toward the cursor
+    const stage = mosaic.parentElement;
+    if (fine && !reduce) {
+      stage.addEventListener('mousemove', (e) => {
+        const r = mosaic.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        mosaic.style.setProperty('--ry', (px * 9).toFixed(2) + 'deg');
+        mosaic.style.setProperty('--rx', (py * -9).toFixed(2) + 'deg');
+      });
+      stage.addEventListener('mouseleave', () => { mosaic.style.setProperty('--ry', '0deg'); mosaic.style.setProperty('--rx', '0deg'); });
+    }
     if (fine && cursor) {
       mosaic.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';

@@ -50,20 +50,23 @@ layout: null
 </header>
 
 <main id="main">
-  <section class="cat-hero">
-    <div class="wrap cat-hero__grid">
-      <div class="cat-hero__text">
-        <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Category 02 of 05</p>
-        <h1 class="cat-hero__title">Lighting<span style="color:var(--c)">.</span></h1>
-        <p class="hero__sub">Desk, floor and portable lights where the form, the optics and the heat path are designed together.</p>
-        <div class="hero__ctas">
-          <a class="btn btn--dark magnetic" href="/#contact">Start a lighting project <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost magnetic" href="#products">See the work</a>
-        </div>
+  <!-- Products first: visitors see the work right under the breadcrumb -->
+  <section class="cat-top" id="products">
+    <div class="wrap">
+      <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Lighting</p>
+      <div class="cat-top__head">
+        <h1 class="cat-top__title"><span class="cat-badge" aria-hidden="true"></span>Lighting<span style="color:var(--c)">.</span></h1>
+        <p class="cat-top__intro">Desk, floor and portable lights where the form, the optics and the heat path are designed together.</p>
       </div>
-      <div class="cat-hero__shape" style="border-radius:50% 50% 0 0">
-        <img src="/assets/img/categories/lighting-dark.svg" alt="" aria-hidden="true" width="400" height="400">
-        <span class="label cat-hero__num">02</span>
+      <div class="pgrid stagger">
+        {% assign items = site.projects | where: "category", "lighting" | sort: "order" %}
+        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
+        <article class="pcard pcard--next">
+          <a class="pcard__panel pcard__panel--cta" href="/#contact">
+            <span>Your lighting product, next.</span>
+            <span class="btn btn--dark btn--sm">Start a project →</span>
+          </a>
+        </article>
       </div>
     </div>
   </section>
@@ -87,25 +90,6 @@ layout: null
         <article><span class="label">01</span><h3>Light first</h3><p>Beam shape, glare and colour temperature decided alongside the form, not after it.</p></article>
         <article><span class="label">02</span><h3>Thermal paths</h3><p>Housings that move LED heat away quietly — no fans, no hot spots.</p></article>
         <article><span class="label">03</span><h3>Joints that hold</h3><p>Friction hinges and balanced arms that stay where you put them.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--line" id="products">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="label label--accent"><span>02 /</span> Selected lighting work</p>
-        <h2 class="h2 reveal">Products in this category.</h2>
-      </div>
-      <div class="pgrid stagger">
-        {% assign items = site.projects | where: "category", "lighting" | sort: "order" %}
-        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
-        <article class="pcard pcard--next">
-          <a class="pcard__panel pcard__panel--cta" href="/#contact">
-            <span>Your lighting product, next.</span>
-            <span class="btn btn--dark btn--sm">Start a project →</span>
-          </a>
-        </article>
       </div>
     </div>
   </section>

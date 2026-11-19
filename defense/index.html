@@ -50,20 +50,23 @@ layout: null
 </header>
 
 <main id="main">
-  <section class="cat-hero">
-    <div class="wrap cat-hero__grid">
-      <div class="cat-hero__text">
-        <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Category 03 of 05</p>
-        <h1 class="cat-hero__title">Defense<span style="color:var(--c)">.</span></h1>
-        <p class="hero__sub">Rugged equipment for defense and security users — designed to work in the field, in gloves and under stress, and to pass the environmental tests it is built for.</p>
-        <div class="hero__ctas">
-          <a class="btn btn--dark magnetic" href="/#contact">Start a defense project <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost magnetic" href="#products">See the work</a>
-        </div>
+  <!-- Products first: visitors see the work right under the breadcrumb -->
+  <section class="cat-top" id="products">
+    <div class="wrap">
+      <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Defense</p>
+      <div class="cat-top__head">
+        <h1 class="cat-top__title"><span class="cat-badge" aria-hidden="true"></span>Defense<span style="color:var(--c)">.</span></h1>
+        <p class="cat-top__intro">Rugged equipment for defense and security users — designed to work in the field, in gloves and under stress, and to pass the environmental tests it is built for.</p>
       </div>
-      <div class="cat-hero__shape" style="border-radius:0 50% 0 0">
-        <img src="/assets/img/categories/defense-light.svg" alt="" aria-hidden="true" width="400" height="400">
-        <span class="label cat-hero__num">03</span>
+      <div class="pgrid stagger">
+        {% assign items = site.projects | where: "category", "defense" | sort: "order" %}
+        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
+        <article class="pcard pcard--next">
+          <a class="pcard__panel pcard__panel--cta" href="/#contact">
+            <span>Your defense product, next.</span>
+            <span class="btn btn--dark btn--sm">Start a project →</span>
+          </a>
+        </article>
       </div>
     </div>
   </section>
@@ -87,25 +90,6 @@ layout: null
         <article><span class="label">01</span><h3>Built for the field</h3><p>Sealing, drop protection and materials planned around environmental test requirements from day one.</p></article>
         <article><span class="label">02</span><h3>Usable under stress</h3><p>Controls, grips and interfaces sized for gloved hands, low light and fast, error-free use.</p></article>
         <article><span class="label">03</span><h3>Ready for the supply chain</h3><p>Documentation, tolerances and manufacturing files prepared for qualified suppliers and long production runs.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--line" id="products">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="label label--accent"><span>02 /</span> Selected defense work</p>
-        <h2 class="h2 reveal">Products in this category.</h2>
-      </div>
-      <div class="pgrid stagger">
-        {% assign items = site.projects | where: "category", "defense" | sort: "order" %}
-        {% for p in items %}{% include project-card.html p=p %}{% endfor %}
-        <article class="pcard pcard--next">
-          <a class="pcard__panel pcard__panel--cta" href="/#contact">
-            <span>Your defense product, next.</span>
-            <span class="btn btn--dark btn--sm">Start a project →</span>
-          </a>
-        </article>
       </div>
     </div>
   </section>
