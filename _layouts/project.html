@@ -29,8 +29,16 @@
         <a class="link" href="/{{ cat.slug }}/">{{ cat.name }}</a> <span>/</span>
         {{ page.title }}
       </p>
-      <h1 class="pp-title">{{ page.title }}<span style="color:var(--c)">.</span></h1>
-      <p class="pp-sub">{{ page.summary }}</p>
+      <div class="pp-hero__grid">
+        <div>
+          <h1 class="pp-title">{{ page.title }}<span style="color:var(--c)">.</span></h1>
+          <p class="pp-sub">{{ page.summary }}</p>
+        </div>
+        <a class="cat-hero__shape glow-shape pp-hero__shape" href="/{{ cat.slug }}/" style="border-radius:{{ cat.shape }}" aria-label="More {{ cat.name | downcase }}">
+          <img src="/assets/img/categories/{{ cat.slug }}-{{ cat.art }}.svg" alt="" aria-hidden="true" width="400" height="400">
+          <span class="label cat-hero__num">{{ cat.name }}</span>
+        </a>
+      </div>
       <dl class="pp-meta">
         <div><dt>Product</dt><dd>{{ page.type }}</dd></div>
         {% if page.client %}<div><dt>Client</dt><dd>{{ page.client }}</dd></div>{% endif %}
@@ -54,7 +62,7 @@
         </div>
       </aside>
       <div class="pp-right">
-        <figure class="pp-shape glow-shape{% if page.photo %} is-photo{% endif %}">
+        <figure class="pp-img pp-img--cover">
           <img src="{{ page.cover }}" alt="{{ page.cover_alt | default: page.title }}" style="object-position:{{ page.cover_position | default: '50% 50%' }}">
         </figure>
         {% for g in page.gallery %}

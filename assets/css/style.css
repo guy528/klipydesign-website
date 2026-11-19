@@ -550,3 +550,12 @@ a.pcard__panel{display:grid;text-decoration:none;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){
   .glow-shape,.glow-shape::before,.glow-shape::after{animation:none}
 }
+
+/* project pages: coloured shape beside the title, plain cover photo */
+.pp-hero__grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.pp-hero__shape{max-width:340px;width:100%;margin-left:auto;text-decoration:none;color:var(--ink)}
+.pp-img--cover img{max-height:80vh;object-fit:cover;background:none}
+@media (max-width:900px){
+  .pp-hero__grid{grid-template-columns:1fr}
+  .pp-hero__shape{max-width:240px;margin:8px 0 0}
+}
