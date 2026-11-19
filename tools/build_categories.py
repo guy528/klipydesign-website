@@ -184,7 +184,7 @@ def page(i, c):
     <div class="wrap">
       <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> {e(c["name"])}</p>
       <div class="cat-top__head">
-        <h1 class="cat-top__title"><span class="cat-badge" aria-hidden="true"></span>{e(c["name"])}<span style="color:var(--c)">.</span></h1>
+        <h1 class="cat-top__title"><span class="cat-badge" aria-hidden="true"></span><span>{e(c["name"])}<span style="color:var(--c)">.</span></span></h1>
         <p class="cat-top__intro">{e(c["intro"])}</p>
       </div>
       <div class="pgrid stagger">
