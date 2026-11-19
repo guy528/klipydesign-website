@@ -140,7 +140,7 @@ def page(i, c):
         '        {% for p in items %}{% include project-card.html p=p %}{% endfor %}\n'
         '        <article class="pcard pcard--next">\n'
         '          <a class="pcard__panel pcard__panel--cta" href="/#contact">\n'
-        '            <span>Your ' + e(c["short"].lower()) + ' product, next.</span>\n'
+        '            <span>Let\'s talk about your next project.</span>\n'
         '            <span class="btn btn--dark btn--sm">Start a project →</span>\n'
         '          </a>\n'
         '        </article>'
@@ -179,14 +179,27 @@ def page(i, c):
 {HEADER}
 
 <main id="main">
-  <!-- Products first: visitors see the work right under the breadcrumb -->
-  <section class="cat-top" id="products">
-    <div class="wrap">
-      <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> {e(c["name"])}</p>
-      <div class="cat-top__head">
-        <h1 class="cat-top__title"><span class="cat-badge" aria-hidden="true"></span><span>{e(c["name"])}<span style="color:var(--c)">.</span></span></h1>
-        <p class="cat-top__intro">{e(c["intro"])}</p>
+  <section class="cat-hero">
+    <div class="wrap cat-hero__grid">
+      <div class="cat-hero__text">
+        <p class="label label--accent"><a class="link" href="/">Home</a> <span>/</span> Category {c["num"]} of 0{len(CATEGORIES)}</p>
+        <h1 class="cat-hero__title">{e(c["name"])}<span style="color:var(--c)">.</span></h1>
+        <p class="hero__sub">{e(c["intro"])}</p>
+        <div class="hero__ctas">
+          <a class="btn btn--dark magnetic" href="/#contact">Start a {e(c["short"].lower())} project <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost magnetic" href="#products">See the work</a>
+        </div>
       </div>
+      <div class="cat-hero__shape" style="border-radius:{SHAPES[i]}">
+        <img src="/assets/img/categories/{c["slug"]}-{c["art"]}.svg" alt="" aria-hidden="true" width="400" height="400">
+        <span class="label cat-hero__num">{c["num"]}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products straight after the header -->
+  <section class="cat-products" id="products">
+    <div class="wrap">
       <div class="pgrid stagger">
 {products}
       </div>
