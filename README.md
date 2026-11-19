@@ -16,7 +16,7 @@ Website for KLIPYDESIGN, an industrial design studio in Tel Aviv. Plain HTML, CS
 
 1. **Photos** — project photos: see ADDING-PROJECTS.md. Capability and studio photos: replace `assets/img/cap-*.svg` and `studio.svg` and update the `src` in `index.html`.
 2. **Text in [brackets]** — in the project files (`_projects/`) and the client testimonial in `index.html`.
-3. **Check facts** — founding year (2009), stats, phone number, social links.
+3. **Check facts** — founding year (2009), stats, social links.
 4. **Contact form** — create a free form at formspree.io and paste its ID into `FORM_ENDPOINT` in `assets/js/main.js`. Until then the form opens the visitor's email app.
 
 ## Projects

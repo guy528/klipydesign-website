@@ -103,7 +103,7 @@ FOOTER = '''<footer class="footer">
       <img class="footer__logo" src="/assets/img/logo/klipy-logo-128.png" alt="KLIPYDESIGN" width="64" height="64" loading="lazy">
       <p class="label label--accent">Industrial design studio</p>
       <p class="footer__pitch">Complete idea-to-product support for brands and founders.</p>
-      <a class="link" href="mailto:studio@klipydesign.com">studio@klipydesign.com</a>
+      <a class="link" href="mailto:klipy_info@klipydesign.com">klipy_info@klipydesign.com</a>
     </div>
     <nav aria-label="Footer">
       <p class="label">Categories</p>

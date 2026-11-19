@@ -6,7 +6,7 @@
   // Free form backend: create a form at https://formspree.io and paste its ID here.
   // Until then, the form opens the visitor's email app with the brief filled in.
   const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-  const CONTACT_EMAIL = 'studio@klipydesign.com';
+  const CONTACT_EMAIL = 'klipy_info@klipydesign.com';
   const MORPH_EVERY_MS = 3600; // how often the hero mosaic changes shape
   /* ------------------------------------------ */
 
