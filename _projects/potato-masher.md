@@ -15,7 +15,7 @@ gallery:
     caption: Mashing potatoes straight in the pot — the slim head reaches deep
   - image: /assets/img/projects/potato-masher/on-the-counter.jpg
     caption: Stands upright on the counter, with the peeler stored beside it
-  - image: /assets/img/projects/potato-masher/concept-sketch.jpg
+  - image: /assets/img/projects/potato-masher/concept-sketch-2.jpg
     caption: Concept sketch — standing form, slotted mashing head, stored peeler and in-use study
     wide: true
 placeholder: false
