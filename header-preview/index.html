@@ -1,0 +1,547 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Header preview — Industrial Design &amp; Product Development Studio | KLIPYDESIGN</title>
+<meta name="description" content="KLIPYDESIGN.COM is an industrial design studio in Tel Aviv. Concept design, 3D prototyping, functional mechanisms and design for manufacturing — from first sketch to first article.">
+<link rel="canonical" href="https://klipydesign.com/">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KLIPYDESIGN.COM">
+<meta property="og:url" content="https://klipydesign.com/">
+<meta property="og:title" content="KLIPYDESIGN — Unexpected thinking. Remarkable products.">
+<meta property="og:description" content="Complete idea-to-product support for brands and founders. Concept, mechanism and tooling run by the same team.">
+<meta property="og:image" content="https://klipydesign.com/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css?v={{ site.time | date: '%s' }}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "KLIPYDESIGN",
+  "url": "https://klipydesign.com/",
+  "logo": "https://klipydesign.com/assets/img/logo/klipy-logo-512.png",
+  "image": "https://klipydesign.com/assets/img/og-image.png",
+  "email": "klipy_info@klipydesign.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Tel Aviv", "addressCountry": "IL" },
+  "areaServed": "Worldwide",
+  "description": "Industrial design studio: concept design, 3D prototyping, functional mechanisms and design for manufacturing.",
+  "knowsAbout": ["Industrial design", "Product design", "3D prototyping", "Mechanism design", "Design for manufacturing"]
+}
+</script>
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ===== Video header (preview) ===== */
+.vhero{position:relative;height:100vh;height:100svh;min-height:600px;margin-top:-73px;color:#fff;overflow:hidden;background:#1a1a1a;isolation:isolate}
+.vhero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.vhero__shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.45) 0,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 40%,rgba(0,0,0,.62) 100%)}
+.vhero__meta{position:absolute;left:0;right:0;top:100px;display:flex;justify-content:space-between;gap:16px}
+.vhero__meta .label{color:rgba(255,255,255,.85)}
+.vhero__bottom{position:absolute;left:0;right:0;bottom:clamp(22px,5vh,52px)}
+.vhero .vhero__title{margin:0;color:#fff;font-size:clamp(50px,9.6vw,156px);line-height:.9;letter-spacing:-.05em;text-shadow:0 2px 30px rgba(0,0,0,.18)}
+.vhero__foot{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-top:clamp(20px,3.4vh,36px);padding-top:clamp(16px,2.4vh,24px);border-top:1px solid rgba(255,255,255,.4)}
+.vhero .vhero__sub{margin:0;max-width:40ch;color:rgba(255,255,255,.9);font-size:clamp(15px,1.25vw,18px)}
+.vhero .vhero__ctas{margin:0;align-items:center}
+.btn--light{background:#fff;color:var(--ink-1);border-color:#fff}
+.btn--light:hover{background:var(--yellow);border-color:var(--yellow)}
+.btn--outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn--outline-light:hover{background:#fff;color:var(--ink-1)}
+.vhero__pause{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.5);border-radius:999px;height:36px;padding:0 14px;cursor:pointer}
+.vhero__pause:hover{background:rgba(255,255,255,.15)}
+/* header sits transparently on the video until you scroll past it */
+.on-video:not(.menu-open) .header{background:transparent;border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;transition:background .35s,border-color .35s}
+.on-video:not(.menu-open) .header .logo__word,.on-video:not(.menu-open) .header .logo__word b{color:#fff}
+.on-video:not(.menu-open) .header .nav a{color:rgba(255,255,255,.85)}
+.on-video:not(.menu-open) .header .nav a:hover{color:#fff}
+.on-video:not(.menu-open) .header .header__cta{background:#fff;color:var(--ink-1);border-color:#fff}
+.on-video:not(.menu-open) .header .burger span{background:#fff}
+.on-video:not(.menu-open) .header__progress{opacity:0}
+.cats{padding-top:clamp(72px,11vh,130px)}
+.cats__title{margin:18px 0 22px;font-size:clamp(40px,5.6vw,80px);line-height:.95;font-weight:800;letter-spacing:-.045em;color:var(--ink-1)}
+.cats__sub{max-width:34em;font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:var(--ink-2)}
+@media (max-width:760px){
+  .vhero__meta{top:88px}.vhero__meta-mid{display:none}
+  .vhero .vhero__ctas{width:100%}
+  .vhero .vhero__ctas .btn{flex:1 1 auto}
+  .vhero__pause{position:absolute;right:20px;top:-52px}
+  .vhero__foot{position:relative}
+}
+@media (prefers-reduced-motion:reduce){.vhero__video{display:none}.vhero{background:#1a1a1a url(/assets/video/header-poster.jpg) center/cover}}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="wrap header__inner">
+    <a class="logo" href="#top" aria-label="KLIPYDESIGN — home">
+      <img class="logo__img" src="/assets/img/logo/klipy-logo-128.png" alt="" width="40" height="40">
+      <span class="logo__word">KLIPY<b>DESIGN</b></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact" class="nav__contact">Contact</a>
+    </nav>
+    <a class="btn btn--dark btn--sm header__cta magnetic" href="#contact"><span class="dot" aria-hidden="true"></span>Let's talk</a>
+    <button class="burger" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+  <span class="header__progress" aria-hidden="true"></span>
+</header>
+
+<main id="main">
+
+<!-- ================= VIDEO HEADER (preview) ================= -->
+<section class="vhero" id="top">
+  <video class="vhero__video" id="vheroVideo" autoplay muted loop playsinline preload="metadata" poster="/assets/video/header-poster.jpg" aria-hidden="true">
+    <source src="/assets/video/header-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/5)">
+    <source src="/assets/video/header.mp4" type="video/mp4">
+  </video>
+  <div class="vhero__shade" aria-hidden="true"></div>
+
+  <div class="wrap vhero__meta">
+    <span class="label">Industrial design &amp; product development</span>
+    <span class="label vhero__meta-mid">Tel Aviv · Est. 2009</span>
+    <span class="label">KLIPYDESIGN.COM</span>
+  </div>
+
+  <div class="wrap vhero__bottom">
+    <h1 class="hero__title vhero__title">
+      <span class="line">Unexpected thinking.</span>
+      <span class="line"><span class="hl">Remarkable</span> products.</span>
+    </h1>
+    <div class="vhero__foot">
+      <p class="hero__sub vhero__sub">Complete idea-to-product support for brands and founders — concept, mechanism and tooling, from the first sketch to the first article.</p>
+      <div class="hero__ctas vhero__ctas">
+        <a class="btn btn--light magnetic" href="#contact">Start a project <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--outline-light magnetic" href="#work">See our work</a>
+        <button class="vhero__pause" id="vheroPause" type="button" aria-pressed="false" aria-label="Pause background video">Pause</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORIES (the colour mosaic, moved below the video header) ================= -->
+<section class="section cats" id="categories">
+  <div class="wrap hero__grid">
+    <div class="cats__text">
+      <span class="label label--accent">What we design</span>
+      <h2 class="cats__title">Five categories.<br>One studio.</h2>
+      <p class="cats__sub">From kitchen tools to lighting, defense, packaging and consumer electronics — every product is designed, engineered and made ready for production under one roof.</p>
+      <div class="hero__ctas"><a class="btn btn--dark magnetic" href="/projects/">All projects <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="hero__mosaic">
+      <!-- Each colour is a product category. Hover = faint product image, click = category page.
+           To use real photos, replace the images in assets/img/categories/ and update the src. -->
+      <nav class="mosaic" id="mosaic" aria-label="Product categories">
+        <a class="tile" href="/kitchen/" data-name="Kitchen products" style="--c:var(--red);--ink:#fff">
+          <img class="tile__img" src="/assets/img/categories/kitchen-anim.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">01</span><b>Kitchen</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/lighting/" data-name="Lighting" style="--c:var(--yellow);--ink:var(--ink-1)">
+          <img class="tile__img" src="/assets/img/categories/lighting-dark.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">02</span><b>Lighting</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/defense/" data-name="Defense" style="--c:var(--navy);--ink:#fff">
+          <img class="tile__img" src="/assets/img/categories/defense-light.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">03</span><b>Defense</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/packaging/" data-name="Packaging" style="--c:var(--teal);--ink:var(--ink-1)">
+          <img class="tile__img" src="/assets/img/categories/packaging-dark.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">04</span><b>Packaging</b><span class="tile__go">Explore →</span></span>
+        </a>
+        <a class="tile" href="/consumer-electronics/" data-name="Consumer electronics" style="--c:var(--steel);--ink:#fff">
+          <img class="tile__img" src="/assets/img/categories/consumer-electronics-light.svg" alt="" aria-hidden="true" width="400" height="400" loading="lazy">
+          <span class="tile__label"><span class="tile__num">05</span><b>Electronics</b><span class="tile__go">Explore →</span></span>
+        </a>
+      </nav>
+      <div class="mosaic__bar">
+        <p class="label mosaic__caption" id="mosaicCaption" aria-live="polite">Five categories · hover to preview · click to explore</p>
+        <div class="mosaic__ctrl">
+          <span class="label mosaic__name" id="mosaicName">Skyline</span>
+          <span class="mosaic__dots" id="mosaicDots"></span>
+          <button class="mosaic__pause" id="mosaicPause" type="button" aria-pressed="false">Pause</button>
+        </div>
+      </div>
+      <div class="mosaic__cursor" id="mosaicCursor" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SELECTED WORKS ================= -->
+<!-- To add real photos: replace each assets/img/project-*.svg with a cut-out PNG/WebP of the product (transparent background works best) and update the src. -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label label--accent"><span>01 /</span> Selected works</p>
+      <div>
+        <h2 class="h2 reveal">Objects that reached the shelf.</h2>
+        <p class="lead reveal">Products we have taken from sketch to shelf. Pick one to open the full case study.</p>
+      </div>
+    </div>
+
+    <!-- Filled automatically from the _projects folder (projects with "featured: true", in "order") -->
+    <div class="works" id="works">
+      {% assign featured = site.projects | where: "featured", true | sort: "order" %}
+      {% for p in featured limit: 5 %}
+      {% assign c = site.data.categories | where: "slug", p.category | first %}
+      <article class="work{% if forloop.first %} is-open{% endif %}" style="--c:var(--{{ c.color }});--ink:{{ c.ink }}">
+        <button class="work__tab" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="w{{ forloop.index0 }}"><span class="work__num">0{{ forloop.index }}</span><span class="work__name">{{ p.title }}</span><span class="work__type">{{ p.type }}</span></button>
+        <div class="work__panel" id="w{{ forloop.index0 }}">
+          <img class="work__img{% if p.photo %} is-photo{% endif %}" src="{{ p.cover }}" alt="{{ p.cover_alt | default: p.title }}" width="800" height="800" loading="lazy">
+          <div class="work__body">
+            <p class="label">0{{ forloop.index }} · {{ p.type }}</p>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.summary }}</p>
+            <dl class="specs">
+              {% if p.scope %}<div><dt>Scope</dt><dd>{{ p.scope | join: " · " }}</dd></div>{% endif %}
+              <div><dt>Category</dt><dd><a class="link" href="/{{ c.slug }}/">{{ c.name }}</a></dd></div>
+            </dl>
+            <a class="work__more" href="{{ p.url }}">View case study <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="sec-foot label">
+      <a href="/projects/" class="link">All projects →</a>
+      <a href="#contact" class="label--accent link">Your product could be next ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CAPABILITIES ================= -->
+<section class="section" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label label--accent"><span>02 /</span> Capabilities</p>
+      <div>
+        <h2 class="h2 reveal">Four moving parts, one assembly.</h2>
+        <p class="lead reveal">Most studios hand a drawing to a factory. We stay on the part — concept, prototype, mechanism and tooling are run by the same team, so a product reaches production with nothing lost in translation.</p>
+      </div>
+    </div>
+
+    <div class="caps">
+      <figure class="caps__fig">
+        <!-- Replace these with real images from your process (sketch, prototype, mechanism, tooling) -->
+        <img class="is-on" src="/assets/img/cap-concept.svg" alt="Concept sketches with orthographic views" width="900" height="1100" loading="lazy">
+        <img src="/assets/img/cap-prototype.svg" alt="3D printed and machined prototype parts" width="900" height="1100" loading="lazy">
+        <img src="/assets/img/cap-mechanism.svg" alt="Mechanism assembly and hinge test rig" width="900" height="1100" loading="lazy">
+        <img src="/assets/img/cap-dfm.svg" alt="Injection mould tooling and first-article parts" width="900" height="1100" loading="lazy">
+        <figcaption class="caps__tag" id="capTag">Concept design</figcaption>
+        <span class="caps__fignum">Fig. <b id="capNum">01</b></span>
+      </figure>
+
+      <div class="caps__list stagger" id="caps">
+        <div class="cap is-open">
+          <h3><button aria-expanded="true" aria-controls="c0"><span class="cap__num">01</span>Concept Design<span class="cap__icon" aria-hidden="true"></span></button></h3>
+          <div class="cap__body" id="c0"><div>
+            <p>We start from the commercial brief, not the moodboard. Sketch cycles, orthographic layouts and 1:1 ergonomic mock-ups let us prove the proportions in the hand before any CAD is committed.</p>
+            <p class="cap__meta">Sketch + CAD · 2–4 weeks · Ergonomics</p>
+          </div></div>
+        </div>
+        <div class="cap">
+          <h3><button aria-expanded="false" aria-controls="c1"><span class="cap__num">02</span>3D Prototyping<span class="cap__icon" aria-hidden="true"></span></button></h3>
+          <div class="cap__body" id="c1"><div>
+            <p>Production-grade CAD from day one, then SLA, FDM and CNC parts built in-house. Looks-like and works-like models you can hold, test and put in front of buyers within days.</p>
+            <p class="cap__meta">CAD · SLA / FDM / CNC · 1–3 weeks per loop</p>
+          </div></div>
+        </div>
+        <div class="cap">
+          <h3><button aria-expanded="false" aria-controls="c2"><span class="cap__num">03</span>Functional Mechanisms<span class="cap__icon" aria-hidden="true"></span></button></h3>
+          <div class="cap__body" id="c2"><div>
+            <p>Hinges, latches, snap-fits, springs and drives. We engineer the moving parts that make a product feel precise, run the tolerance stack-ups, and cycle-test them until they survive real hands.</p>
+            <p class="cap__meta">Mechanism design · Tolerances · Cycle tests</p>
+          </div></div>
+        </div>
+        <div class="cap">
+          <h3><button aria-expanded="false" aria-controls="c3"><span class="cap__num">04</span>Design for Manufacturing<span class="cap__icon" aria-hidden="true"></span></button></h3>
+          <div class="cap__body" id="c3"><div>
+            <p>Draft angles, wall thickness, parting lines, material and process selection, and tooling-ready files — then we stand on the factory floor through samples and first article.</p>
+            <p class="cap__meta">DFM review · Mould-ready CAD · BOM · T1 support</p>
+          </div></div>
+        </div>
+        <p class="caps__count label"><span id="capCount">01</span> / 04</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="section section--line" id="process">
+  <div class="wrap process">
+    <div>
+      <p class="label label--accent">Process</p>
+      <h2 class="h3">Brief in,<br>product out.</h2>
+      <p class="muted">Six stages, one team. Nothing is handed off — the people who sketch it are the people who sign off the tooling.</p>
+    </div>
+    <ol class="steps stagger" id="steps">
+      <li><span class="steps__n">01</span><div><h3>Idea</h3><p>Brief, research, goals and constraints.</p></div></li>
+      <li><span class="steps__n">02</span><div><h3>Concept</h3><p>Sketches, form and CMF direction.</p></div></li>
+      <li><span class="steps__n">03</span><div><h3>CAD</h3><p>Engineered, production-grade 3D.</p></div></li>
+      <li><span class="steps__n">04</span><div><h3>Prototype</h3><p>Tested in real hands. Iterated.</p></div></li>
+      <li><span class="steps__n">05</span><div><h3>DFM</h3><p>Tooling-ready, cost-optimised.</p></div></li>
+      <li><span class="steps__n">06</span><div><h3>Production</h3><p>Mass manufacture, quality-checked.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= STUDIO ================= -->
+<section class="section section--line" id="studio">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label label--accent"><span>03 /</span> Studio</p>
+      <h2 class="h2 h2--wide reveal">We are the team that draws the part, tests the mechanism and stands on the floor at first article.</h2>
+    </div>
+    <div class="studio">
+      <div class="studio__text">
+        <p>KLIPYDESIGN is an industrial design studio building consumer products for brands and founders. Our work starts where a business case meets a physical constraint — and ends when the moulded part comes out of the tool the way it left our screen.</p>
+        <p>That means complete idea-to-product support: form, mechanism, tolerances, tooling and the assembly documentation the factory actually reads. No handoffs between three vendors, no surprises at T1.</p>
+        <!-- CHECK these figures before launch -->
+        <dl class="stats stagger">
+          <div><dt>Years in practice</dt><dd data-count="since" data-since="2009">17</dd></div>
+          <div><dt>Products shipped</dt><dd><span data-count="140">140</span>+</dd></div>
+          <div><dt>Manufacturing partners</dt><dd data-count="12">12</dd></div>
+          <div><dt>Continents on the floor</dt><dd data-count="4">4</dd></div>
+        </dl>
+      </div>
+      <div class="studio__side">
+        <figure class="studio__fig">
+          <img src="/assets/img/studio.svg" alt="The KLIPYDESIGN prototype bench in Tel Aviv" width="900" height="1000" loading="lazy">
+          <span class="chip">Studio — Tel Aviv</span>
+          <figcaption class="label">Prototype bench · review cycle</figcaption>
+        </figure>
+        <blockquote class="quote">
+          <p>“[Client testimonial — one or two sentences from a real client about working with KLIPYDESIGN.]”</p>
+          <footer class="label">[Name] — [Role], [Company]</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section section--line" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label label--accent"><span>04 /</span> Questions</p>
+      <div>
+        <h2 class="h2 reveal">Before we start.</h2>
+        <p class="lead reveal">The questions founders and product teams ask us most often.</p>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="faq__list">
+        <details class="faq__item">
+          <summary><span class="faq__q">What does an industrial design studio do?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>We design physical products from the idea to mass production: research and concept sketches, 3D CAD, working prototypes, mechanisms such as hinges and latches, and the manufacturing files a factory needs to make the product.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">How long does it take to design a new product?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Concept design usually takes 2–4 weeks, and each prototype loop 1–3 weeks. A complete programme from first sketch to production parts typically runs several months, depending on how complex the product and its mechanisms are.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">How much does industrial design cost?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>It depends on the scope. You can hire us for a single stage — a concept, a prototype or a DFM review — or for the whole journey. Send us a short brief and we will reply with a proposal.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Do you sign an NDA before seeing my idea?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. We are happy to sign a non-disclosure agreement before you share any details of your product.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Can you help us manufacture the product?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. Design for manufacturing is part of our core work: we prepare tooling-ready CAD, choose materials and processes with you, work with your factory or our manufacturing partners, and support you through samples and first-article parts.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Do you work with startups and individual founders?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. We work with established brands, startups and individual founders. Many projects start with nothing more than a sketch or a competitor product you want to improve on.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">Do you work with clients outside Israel?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Yes. The studio is in Tel Aviv and we work with clients worldwide, remotely and on site with manufacturers.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary><span class="faq__q">What should I send to get started?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>A short description of the product, who it is for and where the project is today. Sketches, photos, reference products or an existing prototype all help, but none of them are required.</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What does an industrial design studio do?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "We design physical products from the idea to mass production: research and concept sketches, 3D CAD, working prototypes, mechanisms such as hinges and latches, and the manufacturing files a factory needs to make the product."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long does it take to design a new product?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Concept design usually takes 2–4 weeks, and each prototype loop 1–3 weeks. A complete programme from first sketch to production parts typically runs several months, depending on how complex the product and its mechanisms are."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much does industrial design cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the scope. You can hire us for a single stage — a concept, a prototype or a DFM review — or for the whole journey. Send us a short brief and we will reply with a proposal."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you sign an NDA before seeing my idea?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. We are happy to sign a non-disclosure agreement before you share any details of your product."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can you help us manufacture the product?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Design for manufacturing is part of our core work: we prepare tooling-ready CAD, choose materials and processes with you, work with your factory or our manufacturing partners, and support you through samples and first-article parts."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you work with startups and individual founders?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. We work with established brands, startups and individual founders. Many projects start with nothing more than a sketch or a competitor product you want to improve on."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you work with clients outside Israel?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. The studio is in Tel Aviv and we work with clients worldwide, remotely and on site with manufacturers."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What should I send to get started?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A short description of the product, who it is for and where the project is today. Sketches, photos, reference products or an existing prototype all help, but none of them are required."
+   }
+  }
+ ]
+}
+  </script>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section section--line" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label label--accent"><span>05 /</span> Inquiry</p>
+      <h2 class="h2 reveal">Let's talk about your project.</h2>
+    </div>
+    <div class="contact">
+      <div class="contact__info">
+        <dl class="direct">
+          <div><dt class="label">Email</dt><dd><a class="link" href="mailto:klipy_info@klipydesign.com">klipy_info@klipydesign.com</a></dd></div>
+          <div><dt class="label">Studio</dt><dd>Tel Aviv, Israel — working worldwide</dd></div>
+        </dl>
+        <div class="note">
+          <p class="label"><span class="dot dot--pulse" aria-hidden="true"></span>Booking product programmes for Q1 2027</p>
+          <p>Send a brief, a napkin sketch, or a competitor product you want to beat. We reply within one working day. NDA on request.</p>
+        </div>
+      </div>
+
+      <form class="form" id="brief" novalidate>
+        <div class="form__row">
+          <div class="field"><label for="f-name">Your name *</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Email *</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required></div>
+        </div>
+        <div class="field"><label for="f-company">Brand or company <span class="muted">(optional)</span></label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
+        <fieldset class="field">
+          <legend>Focus</legend>
+          <div class="chips">
+            <label class="chip-opt"><input type="checkbox" name="focus" value="Consumer product" checked><span>Consumer product</span></label>
+            <label class="chip-opt"><input type="checkbox" name="focus" value="Mechanism / hardware"><span>Mechanism / hardware</span></label>
+            <label class="chip-opt"><input type="checkbox" name="focus" value="Prototyping"><span>Prototyping</span></label>
+            <label class="chip-opt"><input type="checkbox" name="focus" value="Design for manufacturing"><span>Design for manufacturing</span></label>
+            <label class="chip-opt"><input type="checkbox" name="focus" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+        <div class="field"><label for="f-msg">Project details *</label><textarea id="f-msg" name="message" rows="4" placeholder="What are you building, and how far along is it?" required></textarea></div>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn--dark btn--block" type="submit">Send project brief <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="form__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <img class="footer__logo" src="/assets/img/logo/klipy-logo-128.png" alt="KLIPYDESIGN" width="64" height="64" loading="lazy">
+      <p class="label label--accent">Industrial design studio</p>
+      <p class="footer__pitch">Complete idea-to-product support for brands and founders.</p>
+      <a class="link" href="mailto:klipy_info@klipydesign.com">klipy_info@klipydesign.com</a>
+    </div>
+    <nav aria-label="Footer">
+      <p class="label">Index</p>
+      <a href="/projects/">All projects</a><a href="#capabilities">Capabilities</a><a href="#studio">Studio</a><a href="#contact">Inquiry</a>
+    </nav>
+    <div>
+      <p class="label">Elsewhere</p>
+      <!-- Add your real profile links -->
+      <a href="#" rel="noopener">Instagram ↗</a><a href="#" rel="noopener">LinkedIn ↗</a><a href="#" rel="noopener">Behance ↗</a>
+    </div>
+  </div>
+  <div class="wrap footer__bottom label">
+    <span>© <span id="year">2026</span> KLIPYDESIGN.COM</span>
+    <span>Tel Aviv, Israel — working worldwide</span>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js?v={{ site.time | date: '%s' }}" defer></script>
+
+<script>
+(function(){
+  var v=document.getElementById('vheroVideo'),b=document.getElementById('vheroPause'),hero=document.querySelector('.vhero'),root=document.documentElement;
+  if(b&&v){b.addEventListener('click',function(){if(v.paused){v.play();b.textContent='Pause';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Pause background video')}else{v.pause();b.textContent='Play';b.setAttribute('aria-pressed','true');b.setAttribute('aria-label','Play background video')}});}
+  function onScroll(){var on=window.scrollY < hero.offsetHeight-80 && !document.body.classList.contains('nav-open');root.classList.toggle('on-video',on)}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  if('IntersectionObserver' in window&&v){new IntersectionObserver(function(e){if(b&&b.getAttribute('aria-pressed')==='true')return;e[0].isIntersecting?v.play().catch(function(){}):v.pause()}).observe(hero)}
+})();
+</script>
+</body>
+</html>
