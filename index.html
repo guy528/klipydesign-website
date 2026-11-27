@@ -73,14 +73,6 @@ layout: null
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
-  <!-- Background reel: low-opacity product photos that cross-fade in a loop (built automatically from _projects) -->
-  <div class="hero__reel" aria-hidden="true">
-    {%- assign reel = site.projects | where_exp: "p", "p.placeholder != true" | sort: "order" -%}
-    {%- for p in reel -%}
-    <span class="hero__clip" data-src="{{ p.cover }}"></span>
-    {%- for g in p.gallery -%}{%- unless g.image contains 'sketch' -%}<span class="hero__clip" data-src="{{ g.image }}"></span>{%- endunless -%}{%- endfor -%}
-    {%- endfor -%}
-  </div>
   <div class="wrap hero__grid">
     <div class="hero__text">
       <h1 class="hero__title">

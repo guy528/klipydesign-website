@@ -316,22 +316,3 @@
   }
 })();
 
-/* ---------- Hero background reel: cross-fade product photos in a loop ---------- */
-(function(){
-  const reel=document.querySelector('.hero__reel'); if(!reel) return;
-  const clips=[...reel.querySelectorAll('.hero__clip')]; if(!clips.length) return;
-  for(let i=clips.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));reel.appendChild(clips[j]);[clips[i],clips[j]]=[clips[j],clips[i]];}
-  const load=c=>{if(!c.dataset.loaded){c.style.backgroundImage='url("'+c.dataset.src+'")';c.dataset.loaded=1;}};
-  const preload=c=>{const im=new Image();im.src=c.dataset.src;};
-  let i=0; load(clips[0]); requestAnimationFrame(()=>clips[0].classList.add('is-on'));
-  if(clips.length>1) preload(clips[1]);
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches||clips.length<2) return;
-  let visible=true;
-  if('IntersectionObserver' in window) new IntersectionObserver(e=>{visible=e[0].isIntersecting}).observe(reel);
-  setInterval(()=>{
-    if(!visible||document.hidden) return;
-    const cur=clips[i]; i=(i+1)%clips.length; const nxt=clips[i];
-    load(nxt); nxt.classList.add('is-on'); cur.classList.remove('is-on');
-    preload(clips[(i+1)%clips.length]);
-  },4200);
-})();
