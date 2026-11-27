@@ -177,24 +177,6 @@ layout: null
         </span>
       </a>
       {%- endfor %}
-      {%- comment -%} Concept-sketch tiles: the page picks a few at random and mixes them in. Hover shows the finished product. {%- endcomment -%}
-      {%- for p in gal -%}
-      {%- assign sk = nil -%}{%- for g in p.gallery -%}{%- if g.image contains 'sketch' -%}{%- assign sk = g.image -%}{%- endif -%}{%- endfor -%}
-      {%- if sk %}
-      <a class="gtile gtile--sketch" href="{{ p.url }}" data-sketch>
-        <span class="gtile__media" style="--ar:4/3">
-          <img class="gtile__img" src="{{ sk }}" alt="Concept sketch of the {{ p.title }}" loading="lazy">
-          <img class="gtile__img gtile__img--alt" src="{{ p.cover }}" alt="" aria-hidden="true" loading="lazy">
-          <span class="gtile__corners" aria-hidden="true"></span>
-        </span>
-        <span class="gtile__meta">
-          <b class="gtile__title">Concept sketch</b>
-          <span class="gtile__line">{{ p.title }}, from first idea to finished product</span>
-          <span class="gtile__tags"><span class="gtile__tag">Sketch</span></span>
-        </span>
-      </a>
-      {%- endif -%}
-      {%- endfor %}
     </div>
     <div class="gal__foot"><a class="btn btn--dark magnetic" href="/projects/">All projects <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>

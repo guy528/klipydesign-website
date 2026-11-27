@@ -332,19 +332,13 @@
    a "View project" cursor follows the pointer, and on touch screens visible tiles slowly alternate photos. */
 (function(){
   var grid=document.getElementById('galGrid'); if(!grid) return;
-  var MAX_TILES=20;   /* show at most 20 projects; the rest stay on the All projects page */
-  var MAX_SKETCHES=6; /* how many concept-sketch tiles to mix in on each visit */
-  function shuffle(a){for(var si=a.length-1;si>0;si--){var sj=Math.floor(Math.random()*(si+1));var tmp=a[si];a[si]=a[sj];a[sj]=tmp}return a}
-  var all=[].slice.call(grid.querySelectorAll('.gtile'));
-  var prods=shuffle(all.filter(function(t){return !t.hasAttribute('data-sketch')}));
-  var sketches=shuffle(all.filter(function(t){return t.hasAttribute('data-sketch')}));
-  prods.slice(MAX_TILES).forEach(function(t){t.remove()}); prods=prods.slice(0,MAX_TILES);
-  sketches.slice(MAX_SKETCHES).forEach(function(t){t.remove()}); sketches=sketches.slice(0,MAX_SKETCHES);
-  /* spread the sketches through the product list at random, never two in a row and never first */
-  var tiles=prods.slice(), slots=[]; for(var q=1;q<=prods.length;q++) slots.push(q);
-  shuffle(slots).slice(0,sketches.length).sort(function(x,y){return y-x}).forEach(function(pos,k){tiles.splice(pos,0,sketches[k])});
+  var MAX_TILES=20; /* show at most 20 projects; the rest stay on the All projects page */
+  var tiles=[].slice.call(grid.querySelectorAll('.gtile'));
+  for(var si=tiles.length-1;si>0;si--){var sj=Math.floor(Math.random()*(si+1));var tmp=tiles[si];tiles[si]=tiles[sj];tiles[sj]=tmp} /* random order on every visit */
+  tiles.slice(MAX_TILES).forEach(function(t){t.remove()});
+  tiles=tiles.slice(0,MAX_TILES);
   var ratios=['4/5','1/1','3/4','4/3','1/1','4/5','5/4','3/4'];
-  tiles.forEach(function(t,i){if(!t.hasAttribute('data-sketch')) t.querySelector('.gtile__media').style.setProperty('--ar',ratios[i%ratios.length])});
+  tiles.forEach(function(t,i){t.querySelector('.gtile__media').style.setProperty('--ar',ratios[i%ratios.length])});
   var cols=0;
   function layout(){
     var n=innerWidth<=600?1:innerWidth<=980?2:3; if(n===cols) return; cols=n;
