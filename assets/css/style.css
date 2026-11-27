@@ -19,8 +19,8 @@
   --f-sans:'Figtree', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
   --f-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
 
-  --wrap:1280px;
-  --gut:clamp(20px, 4vw, 56px);
+  --wrap:100vw;                     /* full screen width */
+  --gut:clamp(12px, 1.25vw, 24px);  /* small side margin */
   --ease:cubic-bezier(.22,1,.36,1);
   --morph:cubic-bezier(.645,.045,.355,1);
 }
