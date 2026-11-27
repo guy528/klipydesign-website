@@ -337,10 +337,11 @@
   for(var si=tiles.length-1;si>0;si--){var sj=Math.floor(Math.random()*(si+1));var tmp=tiles[si];tiles[si]=tiles[sj];tiles[sj]=tmp} /* random order on every visit */
   tiles.slice(MAX_TILES).forEach(function(t){t.remove()});
   tiles=tiles.slice(0,MAX_TILES);
-  /* Square tiles on a 4-column grid, like a scattered contact sheet: most take one cell, some take a 2x2 block,
-     and a few cells stay empty on purpose. Each entry is [start column, cells wide]. */
-  var PATTERN=[[1,1],[4,1],[1,1],[3,2],[2,1],[1,1],[2,1],[4,1],[1,2],[4,1],[3,1]];
-  tiles.forEach(function(t,i){var p=PATTERN[i%PATTERN.length]; t.style.setProperty('--gc',p[0]); t.style.setProperty('--gs',p[1]); if(p[1]>1) t.classList.add('gtile--big'); grid.appendChild(t)});
+  /* Square tiles on a 4-column grid with no empty cells: most tiles take one cell, a few take a 2x2 block.
+     The number of big tiles is chosen so the rows always come out full (tiles + 3 x big tiles = a multiple of 4). */
+  var n=tiles.length, big=n%4; while(big+4<=Math.max(1,Math.round(n/4.5))) big+=4; if(big>n) big=0;
+  var bigAt={}; for(var bi=0;bi<big;bi++) bigAt[Math.floor((bi+0.3)*n/big)]=1;
+  tiles.forEach(function(t,i){ if(bigAt[i]){t.style.setProperty('--gs',2);t.classList.add('gtile--big')} grid.appendChild(t) });
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if('IntersectionObserver' in window && !reduce){
     tiles.forEach(function(t){ if(t.getBoundingClientRect().top>innerHeight) t.classList.add('g-hide') });
