@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 4                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Low, weighted and torn with one hand"   # one short line for the homepage gallery
 summary: "A low-profile paper towel holder with a non-skid weighted base and a super compact design — great for small kitchens."
 materials: "ABS"
 cover: /assets/img/projects/compact-paper-towel-holder/cover.jpg

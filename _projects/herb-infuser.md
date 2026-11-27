@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 7                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Fresh herb flavour, nothing left floating"   # one short line for the homepage gallery
 summary: "A slotted infuser that fills soups and stocks with the flavour of fresh herbs — without a single leaf left floating in the pot."
 materials: "PP"
 cover: /assets/img/projects/herb-infuser/cover.jpg

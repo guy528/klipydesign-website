@@ -5,6 +5,7 @@ category: kitchen            # kitchen, lighting, defense, packaging or consumer
 type: "Kitchen tool"
 order: 14                    # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
+tagline: "Three cutting edges, one turn of the dial"   # one short line for the homepage gallery
 summary: "One pastry wheel, three cutting edges — straight, fluted and perforated — chosen with a simple turn of the dial."
 materials: "ABS"
 cover: /assets/img/projects/pastry-trimmer/cover.jpg

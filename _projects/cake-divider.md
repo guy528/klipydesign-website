@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 6                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Equal slices, every time"   # one short line for the homepage gallery
 summary: "A dial guide that divides a cake into 6, 8, 10 or 14 exactly equal slices — no more arguments, and no running out before everyone is served."
 materials: "PP"
 cover: /assets/img/projects/cake-divider/cover.jpg

@@ -5,6 +5,7 @@ category: kitchen            # kitchen, lighting, defense, packaging or consumer
 type: "Kitchen tool"
 order: 13                    # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
+tagline: "Tongs that come apart into spoon and server"   # one short line for the homepage gallery
 summary: "Two utensils that click together into one — use them as tongs, separate them into a spoon and a pasta server, then nest them flat in the drawer."
 materials: "ABS"
 cover: /assets/img/projects/spoon-and-tongs/cover.jpg

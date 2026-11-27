@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 12                    # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Rests on the bowl, keeps the yolk"   # one short line for the homepage gallery
 summary: "A wave-shaped egg separator that rests on the rim of any bowl — the white slips through, the yolk stays put, ready to tip into a second bowl."
 materials: "Silicone, ABS"
 cover: /assets/img/projects/yolp-egg-separator/cover.jpg

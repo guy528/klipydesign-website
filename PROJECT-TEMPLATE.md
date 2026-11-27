@@ -10,6 +10,7 @@ order: 6                   # position in lists (1 = first)
 featured: false            # true = also show in "Selected works" on the homepage (max 5 shown)
 year: "2025"
 client: "Client name"      # or "Confidential"
+tagline: "One short line shown under the name in the homepage gallery"
 summary: "One or two sentences: what the product is and what KLIPYDESIGN did."
 scope: [Concept design, 3D prototyping, Mechanisms, DFM]
 materials: "PP, stainless steel"

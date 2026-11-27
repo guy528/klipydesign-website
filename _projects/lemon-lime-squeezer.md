@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 11                    # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Squeeze, serve and store in one cup"   # one short line for the homepage gallery
 summary: "A soft silicone cup that squeezes lemons and limes straight into the cup or bowl — no sticky hands, no seeds, and a base that keeps the leftover half fresh."
 materials: "Silicone, ABS"
 cover: /assets/img/projects/lemon-lime-squeezer/cover.jpg

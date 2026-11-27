@@ -5,6 +5,7 @@ category: kitchen            # kitchen, lighting, defense, packaging or consumer
 type: "Kitchen tool"
 order: 10                    # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
+tagline: "A masher that keeps a peeler in its handle"   # one short line for the homepage gallery
 summary: "Peel ’n Mash — a 2-in-1 masher that stands on its own and hides a swivel-blade vegetable peeler inside its handle."
 materials: "ABS"
 cover: /assets/img/projects/potato-masher/cover.jpg

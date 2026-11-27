@@ -5,6 +5,7 @@ category: kitchen            # kitchen, lighting, defense, packaging or consumer
 type: "Kitchen tool"
 order: 8                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
+tagline: "Foil, film and parchment in one slim case"   # one short line for the homepage gallery
 summary: "One slim dispenser for foil, plastic wrap, wax paper and parchment — with a clean, quick-cutting edge and a home in the kitchen drawer."
 materials: "ABS"
 cover: /assets/img/projects/wrap-dispenser/cover.jpg

@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 2                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Colour-coded protection for every blade"   # one short line for the homepage gallery
 summary: "Colour-coded covers that protect knife tips and cover sharp blades, so knives can be stored safely in a drawer. Fits 4-, 6- and 12-inch blades."
 materials: "PP"
 cover: /assets/img/projects/knife-blade-covers/cover.jpg

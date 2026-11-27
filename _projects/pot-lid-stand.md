@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 5                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "A dry home for a wet lid and spoon"   # one short line for the homepage gallery
 summary: "A slim, wave-shaped stand that gives a wet, drippy pot lid and cooking spoon a home on the counter."
 materials: "ABS"
 cover: /assets/img/projects/pot-lid-stand/cover.jpg

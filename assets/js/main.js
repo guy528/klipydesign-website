@@ -316,3 +316,58 @@
   }
 })();
 
+
+/* ---------- homepage video header ---------- */
+(function(){
+  var v=document.getElementById('vheroVideo'),b=document.getElementById('vheroPause'),hero=document.querySelector('.vhero'),root=document.documentElement;
+  if(!hero) return;
+  if(b&&v){b.addEventListener('click',function(){if(v.paused){v.play();b.textContent='Pause';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Pause background video')}else{v.pause();b.textContent='Play';b.setAttribute('aria-pressed','true');b.setAttribute('aria-label','Play background video')}});}
+  function onScroll(){var on=window.scrollY < hero.offsetHeight-80 && !document.body.classList.contains('nav-open');root.classList.toggle('on-video',on)}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  if('IntersectionObserver' in window&&v){new IntersectionObserver(function(e){if(b&&b.getAttribute('aria-pressed')==='true')return;e[0].isIntersecting?v.play().catch(function(){}):v.pause()}).observe(hero)}
+})();
+
+
+/* Works gallery: staggered columns (big + two narrow, like a magazine spread), hover swaps to the in-use photo,
+   a "View project" cursor follows the pointer, and on touch screens visible tiles slowly alternate photos. */
+(function(){
+  var grid=document.getElementById('galGrid'); if(!grid) return;
+  var MAX_TILES=20; /* show at most 20 projects; the rest stay on the All projects page */
+  var tiles=[].slice.call(grid.querySelectorAll('.gtile'));
+  for(var si=tiles.length-1;si>0;si--){var sj=Math.floor(Math.random()*(si+1));var tmp=tiles[si];tiles[si]=tiles[sj];tiles[sj]=tmp} /* random order on every visit */
+  tiles.slice(MAX_TILES).forEach(function(t){t.remove()});
+  tiles=tiles.slice(0,MAX_TILES);
+  var ratios=['4/5','1/1','3/4','4/3','1/1','4/5','5/4','3/4'];
+  tiles.forEach(function(t,i){t.querySelector('.gtile__media').style.setProperty('--ar',ratios[i%ratios.length])});
+  var cols=0;
+  function layout(){
+    var n=innerWidth<=600?1:innerWidth<=980?2:3; if(n===cols) return; cols=n;
+    grid.innerHTML=''; var w=n===3?[2,1,1]:n===2?[1,1]:[1]; var h=w.map(function(){return 0}); var c=w.map(function(){var d=document.createElement('div');d.className='gal__col';grid.appendChild(d);return d});
+    if(n>1) h[1]+= n===3?0.9:0.6;
+    tiles.forEach(function(t){
+      var k=0; for(var j=1;j<n;j++) if(h[j]<h[k]) k=j;
+      var ar=t.querySelector('.gtile__media').style.getPropertyValue('--ar').split('/'); var r=(+ar[1])/(+ar[0]);
+      c[k].appendChild(t); h[k]+= r*w[k]/w.reduce(function(a,b){return a+b},0)*n + 0.35;
+    });
+  }
+  layout(); addEventListener('resize',layout);
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    tiles.forEach(function(t){ if(t.getBoundingClientRect().top>innerHeight) t.classList.add('g-hide') });
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){e.target.classList.remove('g-hide'); io.unobserve(e.target)} })},{rootMargin:'0px 0px -8% 0px'});
+    tiles.forEach(function(t){io.observe(t)});
+  }
+  var cur=document.getElementById('galCursor');
+  if(matchMedia('(hover:hover)').matches && cur){
+    tiles.forEach(function(t){
+      t.addEventListener('mouseenter',function(){cur.classList.add('is-on')});
+      t.addEventListener('mouseleave',function(){cur.classList.remove('is-on')});
+    });
+    addEventListener('mousemove',function(e){cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'},{passive:true});
+  } else if(!reduce && 'IntersectionObserver' in window){
+    var vis=new Set();
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?vis.add(e.target):(vis.delete(e.target),e.target.classList.remove('is-alt'))})},{threshold:.6});
+    tiles.forEach(function(t){io2.observe(t)});
+    setInterval(function(){vis.forEach(function(t){t.classList.toggle('is-alt')})},2800);
+  }
+})();

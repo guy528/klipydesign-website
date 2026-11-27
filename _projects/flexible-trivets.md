@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 3                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Silicone that bends to any pot or dish"   # one short line for the homepage gallery
 summary: "Bendable silicone trivets that shape themselves to pots and serving dishes of any shape and size, then straighten out to store flat in a drawer."
 materials: "Silicone and flexible metal"
 cover: /assets/img/projects/flexible-trivets/cover.jpg

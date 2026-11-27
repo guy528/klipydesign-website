@@ -71,24 +71,46 @@ layout: null
 
 <main id="main">
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="top">
-  <div class="wrap hero__grid">
-    <div class="hero__text">
-      <h1 class="hero__title">
-        <span class="hero__kicker label label--accent">Industrial design &amp; product development studio · Tel Aviv · Est. 2009</span>
-        <span class="line">Unexpected</span>
-        <span class="line">thinking.</span>
-        <span class="line"><span class="hl">Remarkable</span></span>
-        <span class="line">products.</span>
-      </h1>
-      <p class="hero__sub">Complete idea-to-product support for brands and founders. Concept, mechanism and tooling run by the same team — from the first sketch to the first article.</p>
-      <div class="hero__ctas">
-        <a class="btn btn--dark magnetic" href="#contact">Start a project <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost magnetic" href="#work">Selected works</a>
+<!-- ================= VIDEO HEADER =================
+     The clip lives in assets/video/ (header.mp4 for wide screens, header-mobile.mp4 for phones). -->
+<section class="vhero" id="top">
+  <video class="vhero__video" id="vheroVideo" autoplay muted loop playsinline preload="metadata" poster="/assets/video/header-poster.jpg" aria-hidden="true">
+    <source src="/assets/video/header-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/5)">
+    <source src="/assets/video/header.mp4" type="video/mp4">
+  </video>
+  <div class="vhero__shade" aria-hidden="true"></div>
+
+  <div class="wrap vhero__meta">
+    <span class="label">Industrial design &amp; product development</span>
+    <span class="label vhero__meta-mid">Tel Aviv · Est. 2009</span>
+    <span class="label">KLIPYDESIGN.COM</span>
+  </div>
+
+  <div class="wrap vhero__bottom">
+    <h1 class="hero__title vhero__title">
+      <span class="line">Unexpected thinking.</span>
+      <span class="line"><span class="hl">Remarkable</span> products.</span>
+    </h1>
+    <div class="vhero__foot">
+      <p class="hero__sub vhero__sub">Complete idea-to-product support for brands and founders — concept, mechanism and tooling, from the first sketch to the first article.</p>
+      <div class="hero__ctas vhero__ctas">
+        <a class="btn btn--light magnetic" href="#contact">Start a project <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--outline-light magnetic" href="#work">See our work</a>
+        <button class="vhero__pause" id="vheroPause" type="button" aria-pressed="false" aria-label="Pause background video">Pause</button>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- ================= CAPABILITIES + CATEGORY MOSAIC ================= -->
+<section class="section cats" id="categories">
+  <div class="wrap hero__grid">
+    <div class="cats__text">
+      <span class="label label--accent">What we do</span>
+      <h2 class="cats__title">Many capabilities.<br>One studio.</h2>
+      <p class="cats__sub">Concept design, 3D prototyping, functional mechanisms and design for manufacturing, all under one roof. We apply them across kitchen products, lighting, defense, packaging and consumer electronics.</p>
+      <div class="hero__ctas"><a class="btn btn--dark magnetic" href="/projects/">All projects <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
     <div class="hero__mosaic">
       <!-- Each colour is a product category. Hover = faint product image, click = category page.
            To use real photos, replace the images in assets/img/categories/ and update the src. -->
@@ -127,47 +149,38 @@ layout: null
   </div>
 </section>
 
-<!-- ================= SELECTED WORKS ================= -->
-<!-- To add real photos: replace each assets/img/project-*.svg with a cut-out PNG/WebP of the product (transparent background works best) and update the src. -->
-<section class="section" id="work">
+<!-- ================= SELECTED WORKS: interactive gallery =================
+     Filled automatically from the _projects folder. The page shuffles the order on every visit and shows up to 20.
+     Each tile uses the cover photo, then fades to the first non-sketch gallery photo on hover. -->
+<section class="section gal" id="work">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="label label--accent"><span>01 /</span> Selected works</p>
-      <div>
-        <h2 class="h2 reveal">Objects that reached the shelf.</h2>
-        <p class="lead reveal">Products we have taken from sketch to shelf. Pick one to open the full case study.</p>
-      </div>
+    <div class="gal__head">
+      <p class="label label--accent">Selected works</p>
+      <h2 class="gal__title">Objects that reached the shelf.</h2>
+      <p class="gal__sub">Products we have taken from sketch to shelf. Hover a project to see it in use, then open it for the full story.</p>
     </div>
-
-    <!-- Filled automatically from the _projects folder (projects with "featured: true", in "order") -->
-    <div class="works" id="works">
-      {% assign featured = site.projects | where: "featured", true | sort: "order" %}
-      {% for p in featured limit: 5 %}
-      {% assign c = site.data.categories | where: "slug", p.category | first %}
-      <article class="work{% if forloop.first %} is-open{% endif %}" style="--c:var(--{{ c.color }});--ink:{{ c.ink }}">
-        <button class="work__tab" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="w{{ forloop.index0 }}"><span class="work__num">0{{ forloop.index }}</span><span class="work__name">{{ p.title }}</span><span class="work__type">{{ p.type }}</span></button>
-        <div class="work__panel" id="w{{ forloop.index0 }}">
-          <img class="work__img{% if p.photo %} is-photo{% endif %}" src="{{ p.cover }}" alt="{{ p.cover_alt | default: p.title }}" width="800" height="800" loading="lazy">
-          <div class="work__body">
-            <p class="label">0{{ forloop.index }} · {{ p.type }}</p>
-            <h3>{{ p.title }}</h3>
-            <p>{{ p.summary }}</p>
-            <dl class="specs">
-              {% if p.scope %}<div><dt>Scope</dt><dd>{{ p.scope | join: " · " }}</dd></div>{% endif %}
-              <div><dt>Category</dt><dd><a class="link" href="/{{ c.slug }}/">{{ c.name }}</a></dd></div>
-            </dl>
-            <a class="work__more" href="{{ p.url }}">View case study <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </article>
-      {% endfor %}
+    <div class="gal__grid" id="galGrid">
+      {%- assign gal = site.projects | where_exp: "p", "p.placeholder != true" | sort: "order" -%}
+      {%- for p in gal -%}
+      {%- assign c = site.data.categories | where: "slug", p.category | first -%}
+      {%- assign alt = nil -%}{%- for g in p.gallery -%}{%- unless alt or g.image contains 'sketch' -%}{%- assign alt = g.image -%}{%- endunless -%}{%- endfor %}
+      <a class="gtile" href="{{ p.url }}">
+        <span class="gtile__media">
+          <img class="gtile__img" src="{{ p.cover }}" alt="{{ p.cover_alt | default: p.title }}" loading="lazy">
+          {% if alt %}<img class="gtile__img gtile__img--alt" src="{{ alt }}" alt="" aria-hidden="true" loading="lazy">{% endif %}
+          <span class="gtile__corners" aria-hidden="true"></span>
+        </span>
+        <span class="gtile__meta">
+          <b class="gtile__title">{{ p.title }}</b>
+          <span class="gtile__line">{{ p.tagline | default: p.type }}</span>
+          <span class="gtile__tags"><span class="gtile__tag">{{ c.name }}</span>{% if p.client %}<span class="gtile__tag gtile__tag--soft">{{ p.client }}</span>{% endif %}</span>
+        </span>
+      </a>
+      {%- endfor %}
     </div>
-
-    <div class="sec-foot label">
-      <a href="/projects/" class="link">All projects →</a>
-      <a href="#contact" class="label--accent link">Your product could be next ↗</a>
-    </div>
+    <div class="gal__foot"><a class="btn btn--dark magnetic" href="/projects/">All projects <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
+  <div class="gal__cursor" id="galCursor" aria-hidden="true">View project →</div>
 </section>
 
 <!-- ================= CAPABILITIES ================= -->

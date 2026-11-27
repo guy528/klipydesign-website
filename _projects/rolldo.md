@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 9                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Roll it or press it for perfect circles"   # one short line for the homepage gallery
 summary: "A rolling, open-loop cutter that turns rolled-out dough and fondant into perfect 2-inch circles — press or roll, from any angle."
 materials: "ABS"
 cover: /assets/img/projects/rolldo/cover.jpg

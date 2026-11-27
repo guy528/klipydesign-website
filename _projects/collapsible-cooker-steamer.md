@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 1                     # position in lists (0 = first)
 featured: false              # true = show in "Selected works" on the homepage
 client: "Confidential"
+tagline: "Boil, steam and strain in one collapsible basket"   # one short line for the homepage gallery
 summary: "A collapsible 1-quart basket for boiling, steaming and straining — up to three fit in one 4-quart pot, so different foods cook side by side."
 materials: "PP"
 cover: /assets/img/projects/collapsible-cooker-steamer/cover.jpg

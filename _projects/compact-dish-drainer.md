@@ -6,6 +6,7 @@ type: "Kitchen tool"
 order: 0                     # position in lists (0 = first)
 featured: true               # true = show in "Selected works" on the homepage
 client: "Klipy kitchen tools"
+tagline: "Unfolds over the sink, folds into the drawer"   # one short line for the homepage gallery
 summary: "A compact, foldable dish rack that lives in the cutlery drawer and unfolds in one step whenever the main dish rack is full."
 materials: "ABS"
 cover: /assets/img/projects/compact-dish-drainer/cover.jpg
