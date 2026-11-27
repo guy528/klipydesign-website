@@ -212,7 +212,7 @@
 
   /* ---------- capabilities accordion + figure swap ---------- */
   const caps = $$('.cap');
-  const figs = $$('.caps__fig img');
+  const figs = $$('.caps__fig > img, .caps__fig > .caps__slide');
   const capNames = ['Concept design', '3D prototyping', 'Functional mechanisms', 'Design for manufacturing'];
   caps.forEach((cap, i) => {
     $('button', cap).addEventListener('click', () => {
@@ -370,4 +370,100 @@
     tiles.forEach(function(t){io2.observe(t)});
     setInterval(function(){vis.forEach(function(t){t.classList.toggle('is-alt')})},2800);
   }
+})();
+
+/* ---------- capabilities: concept-sketch slideshow ----------
+   For each sketch (random order): 1) construction lines, circles and dimension marks draw themselves,
+   2) the sketch's own outlines (found with edge detection) are traced in by a scanning line,
+   3) the real image fades in and the drawing dissolves. Then it holds, and the next sketch starts. */
+(function(){
+  var box=document.getElementById('capSketches'); if(!box) return;
+  var imgs=[].slice.call(box.querySelectorAll('img')); if(!imgs.length) return;
+  for(var i=imgs.length-1;i>0;i--){var k=Math.floor(Math.random()*(i+1));var t=imgs[i];imgs[i]=imgs[k];imgs[k]=t}
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DRAW=1900, MELT=1000, HOLD=3200;               /* timings in ms */
+  var LINE='rgba(214,232,255,', RED='#F32836';
+  var cv=document.createElement('canvas'); cv.className='caps__draw'; cv.setAttribute('aria-hidden','true'); box.appendChild(cv);
+  var ctx=cv.getContext('2d'), W=0, H=0, dpr=1;
+  function fit(){W=box.clientWidth;H=box.clientHeight;dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+  function loaded(im){return new Promise(function(res){if(!im.getAttribute('src')) im.src=im.dataset.src; if(im.complete&&im.naturalWidth) res(im); else {im.onload=function(){res(im)};im.onerror=function(){res(im)}}})}
+  function cover(iw,ih,w,h){var s=Math.max(w/iw,h/ih);var dw=iw*s,dh=ih*s;return [(w-dw)/2,(h-dh)/2,dw,dh]}
+  /* outline map of the image, same crop as object-fit:cover */
+  var cache={};
+  function edges(im){
+    var key=im.dataset.src+'|'+W+'x'+H; if(cache[key]) return cache[key];
+    var sc=Math.min(1,560/Math.max(W,H)), w=Math.max(1,Math.round(W*sc)), h=Math.max(1,Math.round(H*sc));
+    var o=document.createElement('canvas'); o.width=w;o.height=h; var c=o.getContext('2d',{willReadFrequently:true});
+    var r=cover(im.naturalWidth||1,im.naturalHeight||1,w,h); c.drawImage(im,r[0],r[1],r[2],r[3]);
+    var d; try{d=c.getImageData(0,0,w,h).data}catch(e){return null}
+    var g=new Float32Array(w*h),b=new Float32Array(w*h),m=new Float32Array(w*h),x,y,p;
+    for(p=0;p<w*h;p++) g[p]=.299*d[p*4]+.587*d[p*4+1]+.114*d[p*4+2];
+    for(y=1;y<h-1;y++)for(x=1;x<w-1;x++){p=y*w+x;b[p]=(g[p]*4+g[p-1]+g[p+1]+g[p-w]+g[p+w])/8}
+    var hist=new Uint32Array(256),n=0;
+    for(y=2;y<h-2;y++)for(x=2;x<w-2;x++){p=y*w+x;
+      var gx=b[p-w+1]+2*b[p+1]+b[p+w+1]-b[p-w-1]-2*b[p-1]-b[p+w-1];
+      var gy=b[p+w-1]+2*b[p+w]+b[p+w+1]-b[p-w-1]-2*b[p-w]-b[p-w+1];
+      var v=Math.min(255,Math.sqrt(gx*gx+gy*gy)/2); m[p]=v; hist[v|0]++; n++}
+    var keep=n*0.10, acc=0, th=255; for(th=255;th>0;th--){acc+=hist[th]; if(acc>=keep) break}
+    var out=c.createImageData(w,h);
+    for(p=0;p<w*h;p++){ if(m[p]>=th){var a=Math.min(1,(m[p]-th)/(th*0.6+1)+.35); out.data[p*4]=214;out.data[p*4+1]=232;out.data[p*4+2]=255;out.data[p*4+3]=a*255} }
+    c.putImageData(out,0,0); return cache[key]=o;
+  }
+  /* a fresh set of construction geometry for each sketch */
+  function geometry(){
+    var cx=W*(.38+Math.random()*.24), cy=H*(.36+Math.random()*.28), R=Math.min(W,H)*(.22+Math.random()*.12);
+    var dimY=H*(.86+Math.random()*.05), ang=(Math.random()<.5?-1:1)*Math.PI/4;
+    var labels=['Ø '+Math.round(40+Math.random()*80),'R'+Math.round(4+Math.random()*20),'A–A','1:1','SECTION B','SCALE 2:1'];
+    return {cx:cx,cy:cy,R:R,r2:R*(.45+Math.random()*.2),dimY:dimY,ang:ang,lab:labels[Math.floor(Math.random()*labels.length)],lab2:Math.round(60+Math.random()*180)+' mm'};
+  }
+  function seg(x1,y1,x2,y2,p){if(p<=0)return;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x1+(x2-x1)*p,y1+(y2-y1)*p);ctx.stroke()}
+  function clamp(v){return v<0?0:v>1?1:v}
+  function ease(v){return v<.5?2*v*v:1-Math.pow(-2*v+2,2)/2}
+  function frame(t,G,E){
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    var melt=clamp((t-DRAW)/MELT); ctx.globalAlpha=1-melt;
+    /* faint drafting grid */
+    var gp=clamp(t/500); ctx.strokeStyle=LINE+(0.07*gp)+')'; ctx.lineWidth=1;
+    for(var gx=24;gx<W;gx+=24){ctx.beginPath();ctx.moveTo(gx+.5,0);ctx.lineTo(gx+.5,H);ctx.stroke()}
+    for(var gy=24;gy<H;gy+=24){ctx.beginPath();ctx.moveTo(0,gy+.5);ctx.lineTo(W,gy+.5);ctx.stroke()}
+    /* centre lines, circles, diagonal */
+    var p1=ease(clamp(t/700)), p2=ease(clamp((t-250)/900)), p3=ease(clamp((t-650)/800)), p4=ease(clamp((t-1000)/700));
+    ctx.setLineDash([10,4,2,4]); ctx.strokeStyle=RED; ctx.lineWidth=1;
+    seg(0,G.cy,W,G.cy,p1); seg(G.cx,0,G.cx,H,p1); ctx.setLineDash([]);
+    ctx.strokeStyle=LINE+'.75)'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.arc(G.cx,G.cy,G.R,-Math.PI/2,-Math.PI/2+Math.PI*2*p2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(G.cx,G.cy,G.r2,Math.PI/2,Math.PI/2+Math.PI*2*p3); ctx.stroke();
+    seg(G.cx,G.cy,G.cx+Math.cos(G.ang)*G.R*1.5,G.cy+Math.sin(G.ang)*G.R*1.5,p3);
+    /* dimension line with ticks and label */
+    ctx.strokeStyle=LINE+'.8)'; var x1=G.cx-G.R, x2=G.cx+G.R;
+    seg(x1,G.dimY,x2,G.dimY,p4); seg(x1,G.cy,x1,G.dimY+8,p4); seg(x2,G.cy,x2,G.dimY+8,p4);
+    if(p4>.6){ctx.globalAlpha=(1-melt)*clamp((p4-.6)/.4); ctx.fillStyle=LINE+'.95)'; ctx.font='500 11px "JetBrains Mono",ui-monospace,monospace'; ctx.textAlign='center';
+      ctx.fillText(G.lab2,(x1+x2)/2,G.dimY-7); ctx.textAlign='left'; ctx.fillText(G.lab,G.cx+G.R*.72+8,G.cy-G.R*.72-6); ctx.globalAlpha=1-melt}
+    /* the sketch's own outlines, traced in by a scanning line */
+    var sw=ease(clamp((t-350)/(DRAW-350)));
+    if(E&&sw>0){ctx.save();ctx.beginPath();ctx.rect(0,0,W*sw,H);ctx.clip();ctx.drawImage(E,0,0,W,H);ctx.restore()}
+    if(sw>0&&sw<1){ctx.strokeStyle=RED;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(W*sw,0);ctx.lineTo(W*sw,H);ctx.stroke()}
+    ctx.globalAlpha=1;
+  }
+  var n=-1, visible=true, timer=null;
+  if('IntersectionObserver' in window) new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(box);
+  function active(){return visible&&!document.hidden&&box.classList.contains('is-on')}
+  function next(){
+    if(!active()){timer=setTimeout(next,600);return}
+    var prev=imgs[n]; n=(n+1)%imgs.length; var im=imgs[n];
+    loaded(im).then(function(){
+      loaded(imgs[(n+1)%imgs.length]);
+      if(prev) prev.classList.remove('is-show');
+      if(reduce){im.classList.add('is-show');timer=setTimeout(next,HOLD+DRAW);return}
+      fit(); var G=geometry(), E=null; try{E=edges(im)}catch(e){}
+      var t0=performance.now(), shown=false;
+      (function tick(now){
+        var t=now-t0; frame(t,G,E);
+        if(!shown&&t>=DRAW){im.classList.add('is-show');shown=true}
+        if(t<DRAW+MELT) requestAnimationFrame(tick); else {ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);timer=setTimeout(next,HOLD)}
+      })(t0);
+    });
+  }
+  next();
+  addEventListener('resize',function(){cache={}});
 })();
